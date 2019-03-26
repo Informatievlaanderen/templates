@@ -321,21 +321,18 @@
       "value": "(MainAggregate == \"\")"
     },
 
-    "HttpsEverywhere": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Use the HTTPS scheme and TLS security across the entire registry.",
-      "defaultValue": "true"
-    },
-
     "HttpPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json (Api)."
     },
     "HttpPortGenerated": {
       "type": "generated",
-      "generator": "port"
+      "generator": "port",
+      "parameters": {
+        "low": 8000,
+        "high": 8099
+      }
     },
     "HttpPortReplacer": {
       "type": "generated",
@@ -344,20 +341,43 @@
         "sourceVariableName": "HttpPort",
         "fallbackVariableName": "HttpPortGenerated"
       },
-      "replaces": "43300"
+      "replaces": "8000"
+    },
+
+    "HttpProjectorPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json (Projector)."
+    },
+    "HttpProjectorPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 8100,
+        "high": 8199
+      }
+    },
+    "HttpProjectorPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpProjectorPort",
+        "fallbackVariableName": "HttpProjectorPortGenerated"
+      },
+      "replaces": "8100"
     },
 
     "HttpsPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the HTTPS endpoint in launchSettings.json."
+      "description": "Port number to use for the HTTPS endpoint in launchSettings.json (Api)."
     },
     "HttpsPortGenerated": {
       "type": "generated",
       "generator": "port",
       "parameters": {
-        "low": 44300,
-        "high": 44399
+        "low": 9000,
+        "high": 9099
       }
     },
     "HttpsPortReplacer": {
@@ -367,7 +387,30 @@
         "sourceVariableName": "HttpsPort",
         "fallbackVariableName": "HttpsPortGenerated"
       },
-      "replaces": "44300"
+      "replaces": "9000"
+    },
+
+    "HttpsProjectorPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTPS endpoint in launchSettings.json (Projector)."
+    },
+    "HttpsProjectorPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 9100,
+        "high": 9199
+      }
+    },
+    "HttpsProjectorPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpsProjectorPort",
+        "fallbackVariableName": "HttpsProjectorPortGenerated"
+      },
+      "replaces": "9100"
     }
   },
   "sources": [
@@ -383,14 +426,6 @@
         "src/ExampleRegistry.Infrastructure/Repositories/ExampleAggregates.cs",
         "test/ExampleRegistry.Tests/Infrastructure/Customizations-ExampleAggregate.cs",
         "test/ExampleRegistry.Tests/*Tests.cs"
-      ]
-    },
-    {
-      "condition": "(!HttpsEverywhere)",
-      "exclude": [
-        "docs/ssl/**",
-        "src/ExampleRegistry.Api/example.pfx",
-        "src/ExampleRegistry.Projector/example.pfx"
       ]
     }]
   }],

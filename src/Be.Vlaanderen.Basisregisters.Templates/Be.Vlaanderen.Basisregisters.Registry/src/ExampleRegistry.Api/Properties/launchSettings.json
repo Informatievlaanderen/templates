@@ -3,23 +3,15 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:43300/",
-      //#if (HttpsEverywhere)
-      "sslPort": 44300
-      ////#else
-      //"sslPort": 0
-      //#endif
+      "applicationUrl": "http://localhost:8000/",
+      "sslPort": 9000
     }
   },
   "profiles": {
     "ExampleRegistry.Api": {
       "commandName": "Project",
       "launchBrowser": false,
-      //#if (HttpsEverywhere)
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
-      ////#else
-      //"applicationUrl": "http://localhost:5000",
-      //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

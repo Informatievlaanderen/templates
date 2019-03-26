@@ -9,7 +9,7 @@ namespace ExampleRegistry.Api.Infrastructure
     {
         private static class DevelopmentCertificate
         {
-            internal const string Name = "example.pfx";
+            internal const string Name = "localhost.pfx";
             internal const string Key = "example-registry!";
         }
 

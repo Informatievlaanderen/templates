@@ -3,24 +3,18 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:13215/",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:8100/",
+      "sslPort": 9100
     }
   },
   "profiles": {
-    "IIS Express": {
+    "ExampleRegistry.Projector.Api": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "MunicipalityRegistry.Api.Projector": {
-      "commandName": "Project",
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:6001;http://localhost:6000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000/"
     }
   }
 }
