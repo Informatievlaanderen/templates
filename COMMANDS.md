@@ -31,7 +31,11 @@ dotnet new be-registry --dry-run
 # Create a new registry
 
 ```bash
-dotnet new be-registry -n UserRegistry -aggregate User
+dotnet new be-registry \
+       -n UserRegistry \
+       -fn "User Registry" \
+       -aggregate User
+
 The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```
 
