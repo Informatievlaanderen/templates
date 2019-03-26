@@ -4,11 +4,45 @@
 
 > Provide `dotnet new` templates to increase development speed.
 
-## Development
+## Getting started
 
-### Getting started
+Install [Be.Vlaanderen.Basisregisters.Templates](https://www.nuget.org/packages/Be.Vlaanderen.Basisregisters.Templates/) and have a look at the `be-registry` template:
 
-TODO: More to come :)
+```bash
+dotnet new -i Be.Vlaanderen.Basisregisters.Templates
+dotnet new be-registry -h
+```
+
+To create a new registry, in this case a registry containing public services, run:
+
+```bash
+dotnet new be-registry \
+       -n PublicServiceRegistry \
+       -aggregate PublicService \
+       -desc "Authentic base registry containing public services of Flanders." \
+       -company "agentschap Informatie Vlaanderen" \
+       -email informatie.vlaanderen@vlaanderen.be \
+       -site https://vlaanderen.be/informatie-vlaanderen
+```
+
+This can also be used to bootstrap any event-sourced applications accessible via an API:
+
+```bash
+dotnet new be-registry \
+       -n SandwichStore \
+       -aggregate Sandwich \
+       -desc "Backend for the exira.com sandwich store." \
+       -company exira.com \
+       -email info@exira.com \
+       -site https://exira.com \
+       -gh-org exira
+```
+
+To remove everything, run:
+
+```bash
+dotnet new -u Be.Vlaanderen.Basisregisters.Templates
+```
 
 ## License
 
