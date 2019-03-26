@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Basisregisters Vlaanderen",
-  "classifications": ["Basisregisters Vlaanderen", "agentschap Informatie Vlaanderen", "Basisregister"],
-  "name": "Basisregisters Vlaanderen Base Registry",
-  "identity": "Be.Vlaanderen.Basisregisters.ExampleRegistry",
+  "classifications": ["agentschap Informatie Vlaanderen", "Basisregisters Vlaanderen", "Basisregister"],
+  "name": "Basisregisters Vlaanderen Registry",
+  "identity": "Be.Vlaanderen.Basisregisters.Registry",
   "description": "A professional .NET Core project setup including build scripts, documentation, unit tests, and performance tests for a class library project.",
   "shortName": "be-registry",
   "groupIdentity": "Basisregisters Vlaanderen",
@@ -46,9 +46,10 @@
       "datatype": "string",
       "description": "Main aggregate of the registry, adds an example aggregate, command handler, value objects, exceptions and controller.",
       "defaultValue": "",
-      "replaces":"Example"
+      "replaces":"ExampleAggregate",
+      "fileRename": "ExampleAggregate"
     },
-    "ExcludeExample":{
+    "ExcludeExampleAggregate":{
       "type": "computed",
       "value": "(MainAggregate == \"\")"
     },
@@ -106,7 +107,7 @@
   {
     "modifiers": [
     {
-      "condition": "(ExcludeExample)",
+      "condition": "(ExcludeExampleAggregate)",
       "exclude": [
         "src/ExampleRegistry/ExampleAggregate/**",
         "src/ExampleRegistry/Exceptions/**",
@@ -125,5 +126,16 @@
         "src/ExampleRegistry.Projector/example.pfx"
       ]
     }]
+  }],
+  "postActions": [
+  {
+    "condition": "(OS != \"Windows_NT\")",
+    "description": "Make scripts executable",
+    "manualInstructions": [ { "text": "Run 'chmod +x build.sh'" }  ],
+    "actionId": "cb9a6cf3-4f5c-4860-b9d2-03a574959774",
+    "args": {
+      "+x": "build.sh"
+    },
+    "continueOnError": true
   }]
 }

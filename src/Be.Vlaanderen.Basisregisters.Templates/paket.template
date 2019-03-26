@@ -1,0 +1,51 @@
+type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.Templates
+title Be.Vlaanderen.Basisregisters.Templates
+
+authors Basisregisters Vlaanderen
+owners agentschap Informatie Vlaanderen <https://vlaanderen.be/informatie-vlaanderen>
+copyright Copyright (c) agentschap Informatie Vlaanderen
+requireLicenseAcceptance false
+projectUrl https://github.com/informatievlaanderen/templates
+iconUrl https://raw.githubusercontent.com/informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+language en-US
+packageTypes Template
+
+description agentschap Informatie Vlaanderen .NET Core templates.
+
+files
+  Be.Vlaanderen.Basisregisters.Registry/**/* => content
+
+  !Be.Vlaanderen.Basisregisters.Registry/**/appsettings.*.json
+  !Be.Vlaanderen.Basisregisters.Registry/**/*.suo
+  !Be.Vlaanderen.Basisregisters.Registry/**/*.user
+  !Be.Vlaanderen.Basisregisters.Registry/**/*.sln.docstates
+  !Be.Vlaanderen.Basisregisters.Registry/**/*.trx
+  !Be.Vlaanderen.Basisregisters.Registry/**/tracing*.log
+
+  !Be.Vlaanderen.Basisregisters.Registry/.fake/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/.vs/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/dist/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/node_modules/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/packages/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/paket-files/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/docs/ExampleRegistry.Structurizr/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/docs/ExampleRegistry.Structurizr/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/EF.MigrationsHelper/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/EF.MigrationsHelper/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Api/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Api/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Infrastructure/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Infrastructure/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projections.Api/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projections.Api/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projector/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projector/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Tests/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Tests/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Tests/TestResults/**/*

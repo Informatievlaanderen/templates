@@ -1,7 +1,7 @@
 namespace ExampleRegistry.Infrastructure.Modules
 {
     using Autofac;
-#if (!ExcludeExample)
+#if (!ExcludeExampleAggregate)
     using ExampleAggregate;
     using Repositories;
 #endif
@@ -10,7 +10,7 @@ namespace ExampleRegistry.Infrastructure.Modules
     {
         protected override void Load(ContainerBuilder containerBuilder)
         {
-#if (!ExcludeExample)
+#if (!ExcludeExampleAggregate)
             containerBuilder
                 .RegisterType<ExampleAggregates>()
                 .As<IExampleAggregates>();

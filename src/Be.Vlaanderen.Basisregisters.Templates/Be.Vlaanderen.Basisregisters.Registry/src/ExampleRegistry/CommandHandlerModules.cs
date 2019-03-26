@@ -1,7 +1,7 @@
 namespace ExampleRegistry
 {
     using Autofac;
-#if (!ExcludeExample)
+#if (!ExcludeExampleAggregate)
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using ExampleAggregate;
 #endif
@@ -10,7 +10,7 @@ namespace ExampleRegistry
     {
         public static void Register(ContainerBuilder containerBuilder)
         {
-#if (!ExcludeExample)
+#if (!ExcludeExampleAggregate)
             containerBuilder
                 .RegisterType<ExampleAggregateCommandHandlerModule>()
                 .Named<CommandHandlerModule>(typeof(ExampleAggregateCommandHandlerModule).FullName)
