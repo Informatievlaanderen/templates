@@ -465,6 +465,7 @@
         "src/ExampleRegistry.Projections/ExampleAggregateDetail/**",
         "src/ExampleRegistry.Projections/ExampleAggregateList/**",
         "src/ExampleRegistry.Projections/Migrations/**",
+        "test/ExampleRegistry.Api.Tests/*Tests.cs",
         "test/ExampleRegistry.Tests/Infrastructure/Customizations-ExampleAggregate.cs",
         "test/ExampleRegistry.Tests/*Tests.cs"
       ]

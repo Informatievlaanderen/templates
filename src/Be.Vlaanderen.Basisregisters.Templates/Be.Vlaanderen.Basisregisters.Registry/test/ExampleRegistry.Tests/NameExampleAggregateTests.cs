@@ -5,7 +5,6 @@ namespace ExampleRegistry.Tests
     using ExampleAggregate.Commands;
     using ExampleAggregate.Events;
     using Infrastructure;
-    using SqlStreamStore.Streams;
     using Xunit;
     using Xunit.Abstractions;
 

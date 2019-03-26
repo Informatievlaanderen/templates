@@ -58,5 +58,18 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
 
             return ((StubCommandHandlerResolver)_stubResolver).ReceivedCommands;
         }
+
+        protected async Task<List<object>> Put<T>(string endpoint, T request)
+        {
+            await Client
+                .PutAsync(
+                    endpoint,
+                    new StringContent(
+                        JsonConvert.SerializeObject(request),
+                        Encoding.UTF8,
+                        MediaTypeNames.Application.Json));
+
+            return ((StubCommandHandlerResolver)_stubResolver).ReceivedCommands;
+        }
     }
 }

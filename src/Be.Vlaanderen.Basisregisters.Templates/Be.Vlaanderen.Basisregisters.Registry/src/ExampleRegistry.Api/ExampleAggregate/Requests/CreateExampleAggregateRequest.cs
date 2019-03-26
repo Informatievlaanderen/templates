@@ -27,7 +27,8 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
                 .Required();
 
             RuleFor(x => x.Name)
-                .Required();
+                .Required()
+                .SetValidator(new ExampleAggregateNameValidator());
         }
     }
 
@@ -37,7 +38,7 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
             new CreateExampleAggregateRequest
             {
                 Id = Guid.NewGuid(),
-                Name =
+                Name = new ExampleAggregateName
                 {
                     Name = "Something!",
                     Language = Language.English

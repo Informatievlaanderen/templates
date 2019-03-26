@@ -9,6 +9,7 @@ namespace ExampleRegistry.Api.ExampleAggregate
         public static IRuleBuilderOptions<T, Guid?> Required<T>(this IRuleBuilder<T, Guid?> ruleBuilder)
             => ruleBuilder
                 .NotEmpty()
+                .NotEqual(Guid.Empty)
                 .WithMessage("{PropertyName} is required.");
 
         public static IRuleBuilderOptions<T, string> Required<T>(this IRuleBuilder<T, string> ruleBuilder)

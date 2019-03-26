@@ -57,11 +57,7 @@ namespace ExampleRegistry.Api.Infrastructure
                     },
                     new[] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name, },
                     corsHeaders: _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray(),
-                    configureFluentValidation: fv =>
-                    {
-                        fv.ImplicitlyValidateChildProperties = true;
-                        fv.RegisterValidatorsFromAssemblyContaining<Startup>();
-                    });
+                    configureFluentValidation: fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule(new ApiModule(_configuration, services, _loggerFactory));
