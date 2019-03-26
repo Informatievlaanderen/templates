@@ -5,90 +5,76 @@ namespace ExampleRegistry.Api.ExampleAggregate
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
-    using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Infrastructure;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json.Converters;
+    using Projections.Api;
+    using Projections.Api.ExampleAggregateDetail;
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
 
     [ApiVersion("1.0")]
     [AdvertiseApiVersions("1.0")]
-    [ApiRoute("exampleAggregate")]
+    [ApiRoute("example-aggregates")]
     [ApiExplorerSettings(GroupName = "ExampleAggregate")]
     public class ExampleAggregateController : ExampleRegistryController
     {
         /// <summary>
-        /// Vraag een ExampleAggregate op.
+        /// Get details of the example aggregate.
         /// </summary>
-        /// <param aggregateName="exampleAggregateId">Identificator van een ExampleAggregate.</param>
-        /// <param aggregateName="cancellationToken"></param>
-        /// <response code="200">Als een ExampleAggregate gevonden is.</response>
-        /// <response code="404">Als een ExampleAggregate niet gevonden kan worden.</response>
-        /// <response code="412">Als de gevraagde minimum positie van de event store nog niet bereikt is.</response>
-        /// <response code="500">Als er een interne fout is opgetreden.</response>
+        /// <param name="context"></param>
+        /// <param name="exampleAggregateId">Identificator of the example aggregate.</param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="200">If the example aggregate is found.</response>
+        /// <response code="400">If the request contains invalid data.</response>
+        /// <response code="404">If the example aggregate does not exist.</response>
+        /// <response code="500">If an internal error has occured.</response>
         [HttpGet("{exampleAggregateId}")]
-        [ProducesResponseType(typeof(ExampleResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ExampleAggregateDetailResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BasicApiValidationProblem), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status412PreconditionFailed)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status500InternalServerError)]
-        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ExampleResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(ExampleNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status412PreconditionFailed, typeof(PreconditionFailedResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ExampleAggregateDetailResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ValidationErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(ExampleAggregateNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [AllowAnonymous]
-        public async Task<IActionResult> Get(
-            [FromRoute] string exampleAggregateId,
+        public async Task<IActionResult> DetailExampleAggregate(
+            [FromServices] ApiProjectionsContext context,
+            [FromRoute] Guid exampleAggregateId,
             CancellationToken cancellationToken = default)
         {
-            // Dummy
-            return Ok(exampleAggregateId);
+            var request = new DetailExampleAggregateRequest
+            {
+                Id = exampleAggregateId,
+            };
+
+            await new DetailExampleAggregateRequestValidator()
+                .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
+
+            var exampleAggregate = await FindExampleAggregateAsync(context, request.Id.Value, cancellationToken);
+
+            return Ok(
+                new ExampleAggregateDetailResponse(exampleAggregate));
         }
 
-        /// <summary>
-        /// Voer een generiek commando uit.
-        /// </summary>
-        /// <param aggregateName="bus"></param>
-        /// <param aggregateName="commandId">Optionele unieke id voor het verzoek.</param>
-        /// <param aggregateName="command"></param>
-        /// <param aggregateName="cancellationToken"></param>
-        /// <response code="202">Als het verzoek aanvaard is.</response>
-        /// <response code="400">Als het verzoek ongeldige data bevat.</response>
-        /// <response code="500">Als er een interne fout is opgetreden.</response>
-        /// <returns></returns>
-        [HttpPost]
-        [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
-        [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status500InternalServerError)]
-        [SwaggerRequestExample(typeof(CommandRequest), typeof(CommandRequestExample))]
-        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(CommandResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(BadRequestResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        public async Task<IActionResult> Post(
-            [FromServices] ICommandHandlerResolver bus,
-            [FromCommandId] Guid commandId,
-            [FromBody] CommandRequest command,
-            CancellationToken cancellationToken = default)
+        private static async Task<ExampleAggregateDetail> FindExampleAggregateAsync(
+            ApiProjectionsContext context,
+            Guid exampleAggregateId,
+            CancellationToken cancellationToken)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState); // TODO: Check what this returns in the response
+            var exampleAggregate = await context
+                .ExampleAggregateDetails
+                .FindAsync(new object[] { exampleAggregateId }, cancellationToken);
 
-            // Normally this would be bus.Dispatch(...) but because of the example the command to dispatch is of type 'dynamic' which an extension method cannot handle.
-            return Accepted(
-                await CommandHandlerResolverExtensions.Dispatch(
-                    bus,
-                    commandId,
-                    CommandRequestMapping.Map(command),
-                    GetMetadata(),
-                    cancellationToken));
+            if (exampleAggregate == null)
+                throw new ApiException(ExampleAggregateNotFoundResponseExamples.Message, StatusCodes.Status404NotFound);
+
+            return exampleAggregate;
         }
-    }
-
-    public class CommandResponseExamples : IExamplesProvider
-    {
-        public object GetExamples() => new { };
     }
 }

@@ -18,6 +18,6 @@ namespace ExampleRegistry.Api.Infrastructure
             CancellationToken cancellationToken)
             => Request.Headers[HeaderNames.Accept].ToString().Contains("text/html")
                 ? (IActionResult)new RedirectResult("/docs")
-                : new OkObjectResult($"Welcome to the Example Api v{Assembly.GetEntryAssembly().GetName().Version}.");
+                : new OkObjectResult($"Welcome to the Example Registry Api v{Assembly.GetEntryAssembly().GetName().Version}.");
     }
 }

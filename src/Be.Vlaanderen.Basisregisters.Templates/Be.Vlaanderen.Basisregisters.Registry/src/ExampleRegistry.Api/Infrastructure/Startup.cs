@@ -6,6 +6,10 @@ namespace ExampleRegistry.Api.Infrastructure
     using Be.Vlaanderen.Basisregisters.Api;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Be.Vlaanderen.Basisregisters.DataDog.Tracing;
+    using Be.Vlaanderen.Basisregisters.DataDog.Tracing.AspNetCore;
+    using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -23,8 +27,15 @@ namespace ExampleRegistry.Api.Infrastructure
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IConfiguration configuration) => _configuration = configuration;
+        public Startup(
+            IConfiguration configuration,
+            ILoggerFactory loggerFactory)
+        {
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
+        }
 
         /// <summary>Configures services for the application.</summary>
         /// <param aggregateName="services">The collection of services to configure the application with.</param>
@@ -44,14 +55,12 @@ namespace ExampleRegistry.Api.Infrastructure
                             Url = "https://vlaanderen.be/informatie-vlaanderen"
                         }
                     },
-                    new []
-                    {
-                        typeof(Startup).GetTypeInfo().Assembly.GetName().Name,
-                    },
-                    _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray());
+                    new[] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name, },
+                    corsHeaders: _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray(),
+                    configureFluentValidation: fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new ApiModule(_configuration, services));
+            containerBuilder.RegisterModule(new ApiModule(_configuration, services, _loggerFactory));
             _applicationContainer = containerBuilder.Build();
 
             return new AutofacServiceProvider(_applicationContainer);
@@ -64,9 +73,22 @@ namespace ExampleRegistry.Api.Infrastructure
             IApplicationLifetime appLifetime,
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider,
+            ApiDataDogToggle datadogToggle,
+            ApiDebugDataDogToggle debugDataDogToggle,
             MsSqlStreamStore streamStore)
         {
             StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
+
+            if (datadogToggle.FeatureEnabled)
+            {
+                if (debugDataDogToggle.FeatureEnabled)
+                    StartupHelpers.SetupSourceListener(serviceProvider.GetRequiredService<TraceSource>());
+
+                app.UseDataDogTracing(
+                    serviceProvider.GetRequiredService<TraceSource>(),
+                    _configuration["DataDog:ServiceName"],
+                    pathToCheck => pathToCheck != "/");
+            }
 
             app.UseDefaultForApi(new StartupOptions
             {
@@ -78,7 +100,11 @@ namespace ExampleRegistry.Api.Infrastructure
                 Api =
                 {
                     VersionProvider = apiVersionProvider,
-                    Info = groupName => $"Example Registry API {groupName}"
+                    Info = groupName => $"Example Registry API {groupName}",
+                    CustomExceptionHandlers = new IExceptionHandler[]
+                    {
+                        new ValidationExceptionHandling(),
+                    }
                 },
                 Server =
                 {
@@ -93,6 +119,6 @@ namespace ExampleRegistry.Api.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Example Registry API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
+            => $"Right now you are reading the documentation for version {description.ApiVersion} of the Example Registry API{string.Format(description.IsDeprecated ? ", **this API version is not supported any more**." : ".")}";
     }
 }

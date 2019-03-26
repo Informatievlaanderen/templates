@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExampleRegistry.Infrastructure\ExampleRegistry.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExampleRegistry.Projections.Api\ExampleRegistry.Projections.Api.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />

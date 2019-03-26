@@ -268,6 +268,44 @@
         ]
       }
     },
+    "MainAggregateSnakeCase": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "example-aggregate",
+      "parameters": {
+        "source": "MainAggregateCamelCase",
+        "action": "replace",
+        "steps": [
+          { "regex": "A", "replacement": "-a" },
+          { "regex": "B", "replacement": "-b" },
+          { "regex": "C", "replacement": "-c" },
+          { "regex": "D", "replacement": "-d" },
+          { "regex": "E", "replacement": "-e" },
+          { "regex": "F", "replacement": "-f" },
+          { "regex": "G", "replacement": "-g" },
+          { "regex": "H", "replacement": "-h" },
+          { "regex": "I", "replacement": "-i" },
+          { "regex": "J", "replacement": "-j" },
+          { "regex": "K", "replacement": "-k" },
+          { "regex": "L", "replacement": "-l" },
+          { "regex": "M", "replacement": "-m" },
+          { "regex": "N", "replacement": "-n" },
+          { "regex": "O", "replacement": "-o" },
+          { "regex": "P", "replacement": "-p" },
+          { "regex": "Q", "replacement": "-q" },
+          { "regex": "R", "replacement": "-r" },
+          { "regex": "S", "replacement": "-s" },
+          { "regex": "T", "replacement": "-t" },
+          { "regex": "U", "replacement": "-u" },
+          { "regex": "V", "replacement": "-v" },
+          { "regex": "W", "replacement": "-w" },
+          { "regex": "X", "replacement": "-x" },
+          { "regex": "Y", "replacement": "-y" },
+          { "regex": "Z", "replacement": "-z" }
+        ]
+      }
+    },
     "MainAggregateSpaced": {
       "type": "generated",
       "generator": "regex",
