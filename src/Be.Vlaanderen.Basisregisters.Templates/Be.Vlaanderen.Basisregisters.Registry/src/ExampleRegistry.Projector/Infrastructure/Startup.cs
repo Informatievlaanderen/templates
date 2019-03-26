@@ -8,6 +8,7 @@ namespace ExampleRegistry.Projector.Infrastructure
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Be.Vlaanderen.Basisregisters.Projector.ConnectedProjections;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
@@ -17,6 +18,7 @@ namespace ExampleRegistry.Projector.Infrastructure
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Modules;
+    using SqlStreamStore;
     using Swashbuckle.AspNetCore.Swagger;
     using TraceSource = Be.Vlaanderen.Basisregisters.DataDog.Tracing.TraceSource;
 
@@ -54,18 +56,12 @@ namespace ExampleRegistry.Projector.Infrastructure
                             Url = "https://vlaanderen.be/informatie-vlaanderen"
                         }
                     },
-                    new[]
-                    {
-                        typeof(Startup).GetTypeInfo().Assembly.GetName().Name,
-                    },
-                    _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray());
+                    new[] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name, },
+                    corsHeaders: _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray(),
+                    configureFluentValidation: fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             var containerBuilder = new ContainerBuilder();
-
-            containerBuilder.RegisterModule(new LoggingModule(_configuration, services));
-
             containerBuilder.RegisterModule(new ApiModule(_configuration, services, _loggerFactory));
-
             _applicationContainer = containerBuilder.Build();
 
             return new AutofacServiceProvider(_applicationContainer);
@@ -79,8 +75,11 @@ namespace ExampleRegistry.Projector.Infrastructure
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider,
             ApiDataDogToggle datadogToggle,
-            ApiDebugDataDogToggle debugDataDogToggle)
+            ApiDebugDataDogToggle debugDataDogToggle,
+            MsSqlStreamStore streamStore)
         {
+            StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
+
             if (datadogToggle.FeatureEnabled)
             {
                 if (debugDataDogToggle.FeatureEnabled)
@@ -102,7 +101,16 @@ namespace ExampleRegistry.Projector.Infrastructure
                 Api =
                 {
                     VersionProvider = apiVersionProvider,
-                    Info = groupName => $"Example Registry Projector API {groupName}"
+                    Info = groupName => $"Example Registry Projector API {groupName}",
+                    CustomExceptionHandlers = new IExceptionHandler[]
+                    {
+                        new ValidationExceptionHandling(),
+                    }
+                },
+                Server =
+                {
+                    PoweredByName = "Vlaamse overheid - Basisregisters Vlaanderen",
+                    ServerName = "agentschap Informatie Vlaanderen"
                 },
                 MiddlewareHooks =
                 {
@@ -115,6 +123,6 @@ namespace ExampleRegistry.Projector.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Example Registry Projector API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
+            => $"Right now you are reading the documentation for version {description.ApiVersion} of the Example Registry Projector API{string.Format(description.IsDeprecated ? ", **this API version is not supported any more**." : ".")}";
     }
 }

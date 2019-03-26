@@ -8,8 +8,10 @@ namespace ExampleRegistry.Projections.Api
     {
         public override string ProjectionStateSchema => Schema.Api;
 
+#if (!ExcludeExampleAggregate)
         public DbSet<ExampleAggregateDetail.ExampleAggregateDetail> ExampleAggregateDetails { get; set; }
         public DbSet<ExampleAggregateList.ExampleAggregateList> ExampleAggregateList { get; set; }
+#endif
 
         // This needs to be here to please EF
         public ApiProjectionsContext() { }

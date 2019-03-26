@@ -13,6 +13,10 @@ namespace ExampleRegistry.Projector.Infrastructure.Modules
     using Microsoft.Extensions.Logging;
     using ExampleRegistry.Infrastructure;
     using ExampleRegistry.Projections.Api;
+#if (!ExcludeExampleAggregate)
+    using ExampleRegistry.Projections.Api.ExampleAggregateDetail;
+    using ExampleRegistry.Projections.Api.ExampleAggregateList;
+#endif
 
     public class ApiModule : Module
     {
@@ -32,7 +36,9 @@ namespace ExampleRegistry.Projector.Infrastructure.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule(new DataDogModule(_configuration));
+            builder
+                .RegisterModule(new LoggingModule(_configuration, _services))
+                .RegisterModule(new DataDogModule(_configuration));
 
             RegisterProjectionSetup(builder);
 
@@ -65,12 +71,20 @@ namespace ExampleRegistry.Projector.Infrastructure.Modules
                         _services,
                         _loggerFactory));
 
+#if (!ExcludeExampleAggregate)
+            builder
+                .RegisterProjectionMigrator<ApiProjectionsContextMigrationFactory>(
+                    _configuration,
+                    _loggerFactory)
+
+                .RegisterProjections<ExampleAggregateDetailProjections, ApiProjectionsContext>()
+                .RegisterProjections<ExampleAggregateListProjections, ApiProjectionsContext>();
+#else
             builder
                 .RegisterProjectionMigrator<ApiProjectionsContextMigrationFactory>(
                     _configuration,
                     _loggerFactory);
-
-                //.RegisterProjections<PublicServiceProjections, ApiProjectionsContext>();
+#endif
         }
     }
 }

@@ -462,6 +462,9 @@
         "src/ExampleRegistry/ValueObjects/**",
         "src/ExampleRegistry.Api/ExampleAggregate/**",
         "src/ExampleRegistry.Infrastructure/Repositories/ExampleAggregates.cs",
+        "src/ExampleRegistry.Projections/ExampleAggregateDetail/**",
+        "src/ExampleRegistry.Projections/ExampleAggregateList/**",
+        "src/ExampleRegistry.Projections/Migrations/**",
         "test/ExampleRegistry.Tests/Infrastructure/Customizations-ExampleAggregate.cs",
         "test/ExampleRegistry.Tests/*Tests.cs"
       ]
