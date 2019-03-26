@@ -4,24 +4,24 @@
       "longName": "copyright-name",
       "shortName": "copy"
     },
-    "FullName": {
-      "longName": "full-name",
-      "shortName": "fn"
-    },
+
     "MainAggregate": {
       "longName": "main-aggregate",
       "shortName": "aggregate"
     },
+
     "HttpsEverywhere": {
       "longName": "https-everywhere"
     },
+
     "HttpPort": {
       "longName": "http-port",
       "shortName": "http"
     },
+
     "HttpsPort": {
       "longName": "https-port",
       "shortName": "https"
-    },
+    }
   }
 }

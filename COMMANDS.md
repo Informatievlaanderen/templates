@@ -33,8 +33,15 @@ dotnet new be-registry --dry-run
 ```bash
 dotnet new be-registry \
        -n UserRegistry \
-       -fn "User Registry" \
        -aggregate User
+
+The template "Basisregisters Vlaanderen Registry" was created successfully.
+```
+
+```bash
+dotnet new be-registry \
+       -n PublicServiceRegistry \
+       -aggregate PublicService
 
 The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```

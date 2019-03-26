@@ -33,19 +33,11 @@
       "replaces":"(copyright)"
     },
 
-    "FullName": {
-      "type": "parameter",
-      "datatype": "string",
-      "description": "Full name of the registry.",
-      "isRequired": true,
-      "defaultValue": "Example Registry",
-      "replaces":"Example Registry",
-    },
-
     "NameCamelCase": {
       "type": "generated",
       "generator": "regex",
       "dataType": "string",
+      "replaces": "exampleRegistry",
       "parameters": {
         "source": "name",
         "action": "replace",
@@ -114,6 +106,45 @@
           { "regex": "(X)([a-zA-Z]*)", "replacement": "-x$2" },
           { "regex": "(Y)([a-zA-Z]*)", "replacement": "-y$2" },
           { "regex": "(Z)([a-zA-Z]*)", "replacement": "-z$2" }
+        ]
+      }
+    },
+    "NameSpaced": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "Example Registry",
+      "parameters": {
+        "source": "name",
+        "action": "replace",
+        "steps": [
+          { "regex": "(A)([a-zA-Z]*)", "replacement": " A$2" },
+          { "regex": "(B)([a-zA-Z]*)", "replacement": " B$2" },
+          { "regex": "(C)([a-zA-Z]*)", "replacement": " C$2" },
+          { "regex": "(D)([a-zA-Z]*)", "replacement": " D$2" },
+          { "regex": "(E)([a-zA-Z]*)", "replacement": " E$2" },
+          { "regex": "(F)([a-zA-Z]*)", "replacement": " F$2" },
+          { "regex": "(G)([a-zA-Z]*)", "replacement": " G$2" },
+          { "regex": "(H)([a-zA-Z]*)", "replacement": " H$2" },
+          { "regex": "(I)([a-zA-Z]*)", "replacement": " I$2" },
+          { "regex": "(J)([a-zA-Z]*)", "replacement": " J$2" },
+          { "regex": "(K)([a-zA-Z]*)", "replacement": " K$2" },
+          { "regex": "(L)([a-zA-Z]*)", "replacement": " L$2" },
+          { "regex": "(M)([a-zA-Z]*)", "replacement": " M$2" },
+          { "regex": "(N)([a-zA-Z]*)", "replacement": " N$2" },
+          { "regex": "(O)([a-zA-Z]*)", "replacement": " O$2" },
+          { "regex": "(P)([a-zA-Z]*)", "replacement": " P$2" },
+          { "regex": "(Q)([a-zA-Z]*)", "replacement": " Q$2" },
+          { "regex": "(R)([a-zA-Z]*)", "replacement": " R$2" },
+          { "regex": "(S)([a-zA-Z]*)", "replacement": " S$2" },
+          { "regex": "(T)([a-zA-Z]*)", "replacement": " T$2" },
+          { "regex": "(U)([a-zA-Z]*)", "replacement": " U$2" },
+          { "regex": "(V)([a-zA-Z]*)", "replacement": " V$2" },
+          { "regex": "(W)([a-zA-Z]*)", "replacement": " W$2" },
+          { "regex": "(X)([a-zA-Z]*)", "replacement": " X$2" },
+          { "regex": "(Y)([a-zA-Z]*)", "replacement": " Y$2" },
+          { "regex": "(Z)([a-zA-Z]*)", "replacement": " Z$2" },
+          { "regex": "^ ([a-zA-Z]*)", "replacement": "$1" }
         ]
       }
     },
@@ -200,6 +231,54 @@
           { "regex": "^(Y)([a-zA-Z]*)", "replacement": "_y$2" },
           { "regex": "^(Z)([a-zA-Z]*)", "replacement": "_z$2" }
         ]
+      }
+    },
+    "MainAggregateSpaced": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "Example Aggregate",
+      "parameters": {
+        "source": "MainAggregate",
+        "action": "replace",
+        "steps": [
+          { "regex": "(A)([a-zA-Z]*)", "replacement": " A$2" },
+          { "regex": "(B)([a-zA-Z]*)", "replacement": " B$2" },
+          { "regex": "(C)([a-zA-Z]*)", "replacement": " C$2" },
+          { "regex": "(D)([a-zA-Z]*)", "replacement": " D$2" },
+          { "regex": "(E)([a-zA-Z]*)", "replacement": " E$2" },
+          { "regex": "(F)([a-zA-Z]*)", "replacement": " F$2" },
+          { "regex": "(G)([a-zA-Z]*)", "replacement": " G$2" },
+          { "regex": "(H)([a-zA-Z]*)", "replacement": " H$2" },
+          { "regex": "(I)([a-zA-Z]*)", "replacement": " I$2" },
+          { "regex": "(J)([a-zA-Z]*)", "replacement": " J$2" },
+          { "regex": "(K)([a-zA-Z]*)", "replacement": " K$2" },
+          { "regex": "(L)([a-zA-Z]*)", "replacement": " L$2" },
+          { "regex": "(M)([a-zA-Z]*)", "replacement": " M$2" },
+          { "regex": "(N)([a-zA-Z]*)", "replacement": " N$2" },
+          { "regex": "(O)([a-zA-Z]*)", "replacement": " O$2" },
+          { "regex": "(P)([a-zA-Z]*)", "replacement": " P$2" },
+          { "regex": "(Q)([a-zA-Z]*)", "replacement": " Q$2" },
+          { "regex": "(R)([a-zA-Z]*)", "replacement": " R$2" },
+          { "regex": "(S)([a-zA-Z]*)", "replacement": " S$2" },
+          { "regex": "(T)([a-zA-Z]*)", "replacement": " T$2" },
+          { "regex": "(U)([a-zA-Z]*)", "replacement": " U$2" },
+          { "regex": "(V)([a-zA-Z]*)", "replacement": " V$2" },
+          { "regex": "(W)([a-zA-Z]*)", "replacement": " W$2" },
+          { "regex": "(X)([a-zA-Z]*)", "replacement": " X$2" },
+          { "regex": "(Y)([a-zA-Z]*)", "replacement": " Y$2" },
+          { "regex": "(Z)([a-zA-Z]*)", "replacement": " Z$2" },
+          { "regex": "^ ([a-zA-Z]*)", "replacement": "$1" }
+        ]
+      }
+    },
+    "MainAggregateSpacedLower": {
+      "type": "generated",
+      "generator": "casing",
+      "replaces": "example aggregate",
+      "parameters": {
+        "source":"MainAggregateSpaced",
+        "toLower": true
       }
     },
     "ExcludeExampleAggregate":{

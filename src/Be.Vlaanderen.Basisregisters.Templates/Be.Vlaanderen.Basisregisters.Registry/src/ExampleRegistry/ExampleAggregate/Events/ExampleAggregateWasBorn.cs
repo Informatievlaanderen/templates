@@ -5,7 +5,7 @@ namespace ExampleRegistry.ExampleAggregate.Events
     using Newtonsoft.Json;
 
     [EventName("ExampleAggregateWasBorn")]
-    [EventDescription("The ExampleAggregate was born!")]
+    [EventDescription("The example aggregate was born!")]
     public class ExampleAggregateWasBorn
     {
         public Guid ExampleAggregateId { get; }
