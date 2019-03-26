@@ -4,16 +4,16 @@ namespace ExampleRegistry
     using Be.Vlaanderen.Basisregisters.AggregateSource;
     using Exceptions;
 
-    public class ExampleName : ValueObject<ExampleName>
+    public class ExampleAggregateName : ValueObject<ExampleAggregateName>
     {
         public string Name { get; }
 
         public Language Language { get; }
 
-        public ExampleName(string name, Language language)
+        public ExampleAggregateName(string name, Language language)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new NoNameException("Name of an example cannot be empty.");
+                throw new NoExampleAggregateNameException();
 
             Name = name;
             Language = language;

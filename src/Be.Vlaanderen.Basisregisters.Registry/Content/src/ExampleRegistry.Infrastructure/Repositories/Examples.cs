@@ -6,9 +6,9 @@ namespace ExampleRegistry.Infrastructure.Repositories
     using ExampleAggregate;
     using SqlStreamStore;
 
-    public class Examples : Repository<Example, ExampleId>, IExamples
+    public class ExampleAggregates : Repository<ExampleAggregate, ExampleAggregateId>, IExampleAggregates
     {
-        public Examples(ConcurrentUnitOfWork unitOfWork, IStreamStore eventStore, EventMapping eventMapping, EventDeserializer eventDeserializer)
-            : base(Example.Factory, unitOfWork, eventStore, eventMapping, eventDeserializer) { }
+        public ExampleAggregates(ConcurrentUnitOfWork unitOfWork, IStreamStore eventStore, EventMapping eventMapping, EventDeserializer eventDeserializer)
+            : base(ExampleAggregate.Factory, unitOfWork, eventStore, eventMapping, eventDeserializer) { }
     }
 }

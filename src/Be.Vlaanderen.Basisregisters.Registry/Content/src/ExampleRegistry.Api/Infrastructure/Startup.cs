@@ -27,7 +27,7 @@ namespace ExampleRegistry.Api.Infrastructure
         public Startup(IConfiguration configuration) => _configuration = configuration;
 
         /// <summary>Configures services for the application.</summary>
-        /// <param name="services">The collection of services to configure the application with.</param>
+        /// <param aggregateName="services">The collection of services to configure the application with.</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services

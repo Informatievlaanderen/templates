@@ -14,17 +14,17 @@ namespace ExampleRegistry.Tests.DoExample
 
         [Theory, DefaultData]
         public void then_example_should_be_born_and_had_happened_multiple_times(
-            DoExample doExampleCommand)
+            NameExampleAggregate nameExampleAggregateCommand)
         {
-            var fixtureLanguage = doExampleCommand.Name.Language;
+            var fixtureLanguage = nameExampleAggregateCommand.ExampleAggregateName.Language;
 
             Assert(new Scenario()
-                .Given(doExampleCommand.ExampleId,
-                    new ExampleWasBorn(doExampleCommand.ExampleId),
-                    new ExampleHappened(doExampleCommand.ExampleId, new ExampleName("Bla", fixtureLanguage == Language.Dutch ? Language.English : Language.Dutch)))
-                .When(doExampleCommand)
-                .Then(doExampleCommand.ExampleId,
-                    new ExampleHappened(doExampleCommand.ExampleId, doExampleCommand.Name)));
+                .Given(nameExampleAggregateCommand.ExampleAggregateId,
+                    new ExampleAggregateWasBorn(nameExampleAggregateCommand.ExampleAggregateId),
+                    new ExampleAggregateWasNamed(nameExampleAggregateCommand.ExampleAggregateId, new ExampleAggregateName("Bla", fixtureLanguage == Language.Dutch ? Language.English : Language.Dutch)))
+                .When(nameExampleAggregateCommand)
+                .Then(nameExampleAggregateCommand.ExampleAggregateId,
+                    new ExampleAggregateWasNamed(nameExampleAggregateCommand.ExampleAggregateId, nameExampleAggregateCommand.ExampleAggregateName)));
         }
     }
 }

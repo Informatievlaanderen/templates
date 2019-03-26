@@ -13,14 +13,14 @@ namespace ExampleRegistry.Tests.DoExample
 
         [Theory, DefaultData]
         public void then_example_should_have_been_born_and_had_happened(
-            DoExample doExampleCommand)
+            NameExampleAggregate nameExampleAggregateCommand)
         {
             Assert(new Scenario()
                 .GivenNone()
-                .When(doExampleCommand)
-                .Then(doExampleCommand.ExampleId,
-                    new ExampleWasBorn(doExampleCommand.ExampleId),
-                    new ExampleHappened(doExampleCommand.ExampleId, doExampleCommand.Name)));
+                .When(nameExampleAggregateCommand)
+                .Then(nameExampleAggregateCommand.ExampleAggregateId,
+                    new ExampleAggregateWasBorn(nameExampleAggregateCommand.ExampleAggregateId),
+                    new ExampleAggregateWasNamed(nameExampleAggregateCommand.ExampleAggregateId, nameExampleAggregateCommand.ExampleAggregateName)));
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace ExampleRegistry.Api.Example
+namespace ExampleRegistry.Api.ExampleAggregate
 {
     using System;
     using System.Threading;
@@ -17,20 +17,20 @@ namespace ExampleRegistry.Api.Example
 
     [ApiVersion("1.0")]
     [AdvertiseApiVersions("1.0")]
-    [ApiRoute("example")]
-    [ApiExplorerSettings(GroupName = "Example")]
-    public class ExampleController : ExampleRegistryController
+    [ApiRoute("exampleAggregate")]
+    [ApiExplorerSettings(GroupName = "ExampleAggregate")]
+    public class ExampleAggregateController : ExampleRegistryController
     {
         /// <summary>
-        /// Vraag een voorbeeld op.
+        /// Vraag een ExampleAggregate op.
         /// </summary>
-        /// <param name="id">Identificator van het voorbeeld.</param>
-        /// <param name="cancellationToken"></param>
-        /// <response code="200">Als het voorbeeld gevonden is.</response>
-        /// <response code="404">Als het voorbeeld niet gevonden kan worden.</response>
+        /// <param aggregateName="exampleAggregateId">Identificator van een ExampleAggregate.</param>
+        /// <param aggregateName="cancellationToken"></param>
+        /// <response code="200">Als een ExampleAggregate gevonden is.</response>
+        /// <response code="404">Als een ExampleAggregate niet gevonden kan worden.</response>
         /// <response code="412">Als de gevraagde minimum positie van de event store nog niet bereikt is.</response>
         /// <response code="500">Als er een interne fout is opgetreden.</response>
-        [HttpGet("{id}")]
+        [HttpGet("{exampleAggregateId}")]
         [ProducesResponseType(typeof(ExampleResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status412PreconditionFailed)]
@@ -41,20 +41,20 @@ namespace ExampleRegistry.Api.Example
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [AllowAnonymous]
         public async Task<IActionResult> Get(
-            [FromRoute] string id,
+            [FromRoute] string exampleAggregateId,
             CancellationToken cancellationToken = default)
         {
             // Dummy
-            return Ok(id);
+            return Ok(exampleAggregateId);
         }
 
         /// <summary>
         /// Voer een generiek commando uit.
         /// </summary>
-        /// <param name="bus"></param>
-        /// <param name="commandId">Optionele unieke id voor het verzoek.</param>
-        /// <param name="command"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param aggregateName="bus"></param>
+        /// <param aggregateName="commandId">Optionele unieke id voor het verzoek.</param>
+        /// <param aggregateName="command"></param>
+        /// <param aggregateName="cancellationToken"></param>
         /// <response code="202">Als het verzoek aanvaard is.</response>
         /// <response code="400">Als het verzoek ongeldige data bevat.</response>
         /// <response code="500">Als er een interne fout is opgetreden.</response>

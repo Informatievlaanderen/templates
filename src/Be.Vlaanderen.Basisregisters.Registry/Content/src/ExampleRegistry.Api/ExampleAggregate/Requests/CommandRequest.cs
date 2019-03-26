@@ -1,4 +1,4 @@
-namespace ExampleRegistry.Api.Example.Requests
+namespace ExampleRegistry.Api.ExampleAggregate.Requests
 {
     using System.ComponentModel.DataAnnotations;
     using Newtonsoft.Json;
@@ -21,7 +21,7 @@ namespace ExampleRegistry.Api.Example.Requests
         {
             return new CommandRequest
             {
-                Type = "ExampleRegistry.Example.Commands.DoExample",
+                Type = "ExampleRegistry.Example.Commands.NameExampleAggregate",
                 Command = "{}"
             };
         }

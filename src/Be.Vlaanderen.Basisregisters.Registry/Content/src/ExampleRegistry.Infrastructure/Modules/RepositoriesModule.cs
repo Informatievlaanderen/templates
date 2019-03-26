@@ -10,8 +10,8 @@ namespace ExampleRegistry.Infrastructure.Modules
         {
             // We could just scan the assembly for classes using Repository<> and registering them against the only interface they implement
             containerBuilder
-                .RegisterType<Examples>()
-                .As<IExamples>();
+                .RegisterType<ExampleAggregates>()
+                .As<IExampleAggregates>();
         }
     }
 }

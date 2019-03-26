@@ -37,7 +37,7 @@ namespace ExampleRegistry.Projector.Infrastructure
         }
 
         /// <summary>Configures services for the application.</summary>
-        /// <param name="services">The collection of services to configure the application with.</param>
+        /// <param aggregateName="services">The collection of services to configure the application with.</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services

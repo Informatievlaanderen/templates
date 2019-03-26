@@ -1,4 +1,4 @@
-namespace ExampleRegistry.Api.Example.Responses
+namespace ExampleRegistry.Api.ExampleAggregate.Responses
 {
     using System;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
