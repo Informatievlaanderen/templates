@@ -10,7 +10,9 @@ namespace ExampleRegistry.Api.ExampleAggregate
     using Be.Vlaanderen.Basisregisters.Api.Search.Filtering;
     using Be.Vlaanderen.Basisregisters.Api.Search.Pagination;
     using Be.Vlaanderen.Basisregisters.Api.Search.Sorting;
+    using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Infrastructure;
+    using Infrastructure.Responses;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,45 @@ namespace ExampleRegistry.Api.ExampleAggregate
     [ApiExplorerSettings(GroupName = "ExampleAggregate")]
     public class ExampleAggregateController : ExampleRegistryController
     {
+        /// <summary>
+        /// Create example aggregate.
+        /// </summary>
+        /// <param name="bus"></param>
+        /// <param name="commandId">Optional unique identifier for the request.</param>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="202">If the request has been accepted.</response>
+        /// <response code="400">If the request contains invalid data.</response>
+        /// <response code="500">If an internal error has occurred.</response>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(BasicApiValidationProblem), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status500InternalServerError)]
+        [SwaggerRequestExample(typeof(CreateExampleAggregateRequest), typeof(CreateExampleAggregateRequestExample))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(EmptyResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ValidationErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        public async Task<IActionResult> CreateDomain(
+            [FromServices] ICommandHandlerResolver bus,
+            [FromCommandId] Guid commandId,
+            [FromBody] CreateExampleAggregateRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            await new CreateExampleAggregateRequestValidator()
+                .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
+
+            var command = CreateExampleAggregateRequestMapping.Map(request);
+
+            return Accepted(
+                $"/v1/example-aggregates/{command.ExampleAggregateId}",
+                await bus.Dispatch(
+                    commandId,
+                    command,
+                    GetMetadata(),
+                    cancellationToken));
+        }
+
         /// <summary>
         /// List example aggregates.
         /// </summary>

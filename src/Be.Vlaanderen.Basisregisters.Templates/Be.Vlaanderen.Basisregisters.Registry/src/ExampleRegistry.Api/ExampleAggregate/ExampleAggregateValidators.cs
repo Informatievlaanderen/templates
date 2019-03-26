@@ -1,6 +1,7 @@
 namespace ExampleRegistry.Api.ExampleAggregate
 {
     using System;
+    using Requests;
     using FluentValidation;
 
     public static class ExampleAggregateValidators
@@ -11,6 +12,17 @@ namespace ExampleRegistry.Api.ExampleAggregate
                 .WithMessage("{PropertyName} is required.");
 
         public static IRuleBuilderOptions<T, string> Required<T>(this IRuleBuilder<T, string> ruleBuilder)
+            => ruleBuilder
+                .NotEmpty()
+                .WithMessage("{PropertyName} is required.");
+
+        public static IRuleBuilderOptions<T, Language?> Required<T>(this IRuleBuilder<T, Language?> ruleBuilder)
+            => ruleBuilder
+                .NotEmpty()
+                .IsInEnum()
+                .WithMessage("{PropertyName} is required.");
+
+        public static IRuleBuilderOptions<T, ExampleAggregateName> Required<T>(this IRuleBuilder<T, ExampleAggregateName> ruleBuilder)
             => ruleBuilder
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required.");
