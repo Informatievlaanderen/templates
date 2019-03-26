@@ -50,7 +50,7 @@ namespace ExampleRegistry.Api.ExampleAggregate
         [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(EmptyResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ValidationErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        public async Task<IActionResult> CreateDomain(
+        public async Task<IActionResult> CreateExampleAggregate(
             [FromServices] ICommandHandlerResolver bus,
             [FromCommandId] Guid commandId,
             [FromBody] CreateExampleAggregateRequest request,
@@ -60,6 +60,50 @@ namespace ExampleRegistry.Api.ExampleAggregate
                 .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
 
             var command = CreateExampleAggregateRequestMapping.Map(request);
+
+            return Accepted(
+                $"/v1/example-aggregates/{command.ExampleAggregateId}",
+                await bus.Dispatch(
+                    commandId,
+                    command,
+                    GetMetadata(),
+                    cancellationToken));
+        }
+
+        /// <summary>
+        /// Update example aggregate.
+        /// </summary>
+        /// <param name="bus"></param>
+        /// <param name="exampleAggregateId">Identificator of the example aggregate.</param>
+        /// <param name="commandId">Optional unique identifier for the request.</param>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="202">If the request has been accepted.</response>
+        /// <response code="400">If the request contains invalid data.</response>
+        /// <response code="500">If an internal error has occurred.</response>
+        /// <returns></returns>
+        [HttpPut("{exampleAggregateId}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(BasicApiValidationProblem), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status500InternalServerError)]
+        [SwaggerRequestExample(typeof(UpdateExampleAggregateRequest), typeof(UpdateExampleAggregateRequestExample))]
+        [SwaggerResponseExample(StatusCodes.Status202Accepted, typeof(EmptyResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ValidationErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        public async Task<IActionResult> UpdateExampleAggregate(
+            [FromServices] ICommandHandlerResolver bus,
+            [FromCommandId] Guid commandId,
+            [FromRoute] Guid exampleAggregateId,
+            [FromBody] UpdateExampleAggregateRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            if (request != null)
+                request.Id = exampleAggregateId;
+
+            await new UpdateExampleAggregateRequestValidator()
+                .ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
+
+            var command = UpdateExampleAggregateRequestMapping.Map(request);
 
             return Accepted(
                 $"/v1/example-aggregates/{command.ExampleAggregateId}",

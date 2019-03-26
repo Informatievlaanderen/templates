@@ -6,22 +6,22 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
     using FluentValidation;
     using Swashbuckle.AspNetCore.Filters;
 
-    public class CreateExampleAggregateRequest
+    public class UpdateExampleAggregateRequest
     {
-        /// <summary>Id the example aggregate to create.</summary>
+        /// <summary>Id the example aggregate to update.</summary>
         [Required]
         [Display(Name = "Id")]
-        public Guid? Id { get; set; }
+        internal Guid? Id { get; set; }
 
-        /// <summary>Name of the example aggregate to create.</summary>
+        /// <summary>Name of the example aggregate to update.</summary>
         [Required]
         [Display(Name = "Name")]
         public ExampleAggregateName Name { get; set; }
     }
 
-    public class CreateExampleAggregateRequestValidator : AbstractValidator<CreateExampleAggregateRequest>
+    public class UpdateExampleAggregateRequestValidator : AbstractValidator<UpdateExampleAggregateRequest>
     {
-        public CreateExampleAggregateRequestValidator()
+        public UpdateExampleAggregateRequestValidator()
         {
             RuleFor(x => x.Id)
                 .Required();
@@ -31,23 +31,23 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
         }
     }
 
-    public class CreateExampleAggregateRequestExample : IExamplesProvider
+    public class UpdateExampleAggregateRequestExample : IExamplesProvider
     {
         public object GetExamples() =>
-            new CreateExampleAggregateRequest
+            new UpdateExampleAggregateRequest
             {
                 Id = Guid.NewGuid(),
                 Name =
                 {
-                    Name = "Something!",
-                    Language = Language.English
+                    Name = "Iets!",
+                    Language = Language.Dutch
                 }
             };
     }
 
-    public static class CreateExampleAggregateRequestMapping
+    public static class UpdateExampleAggregateRequestMapping
     {
-        public static NameExampleAggregate Map(CreateExampleAggregateRequest message)
+        public static NameExampleAggregate Map(UpdateExampleAggregateRequest message)
             => new NameExampleAggregate(
                 new ExampleAggregateId(message.Id.Value),
                 new ExampleRegistry.ExampleAggregateName(message.Name.Name, message.Name.Language.Value));
