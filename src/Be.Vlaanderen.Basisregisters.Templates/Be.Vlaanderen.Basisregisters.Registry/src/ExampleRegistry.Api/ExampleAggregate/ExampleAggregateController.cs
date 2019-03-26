@@ -1,17 +1,24 @@
 namespace ExampleRegistry.Api.ExampleAggregate
 {
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
+    using Be.Vlaanderen.Basisregisters.Api.Search;
+    using Be.Vlaanderen.Basisregisters.Api.Search.Filtering;
+    using Be.Vlaanderen.Basisregisters.Api.Search.Pagination;
+    using Be.Vlaanderen.Basisregisters.Api.Search.Sorting;
     using Infrastructure;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using Newtonsoft.Json.Converters;
     using Projections.Api;
     using Projections.Api.ExampleAggregateDetail;
+    using Query;
     using Requests;
     using Responses;
     using Swashbuckle.AspNetCore.Filters;
@@ -22,6 +29,42 @@ namespace ExampleRegistry.Api.ExampleAggregate
     [ApiExplorerSettings(GroupName = "ExampleAggregate")]
     public class ExampleAggregateController : ExampleRegistryController
     {
+        /// <summary>
+        /// List example aggregates.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="200">If example aggregates are found.</response>
+        /// <response code="500">If an internal error has occurred.</response>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(ExampleAggregateListResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status500InternalServerError)]
+        [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ExampleAggregateListResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
+        public async Task<IActionResult> ListExampleAggregates(
+            [FromServices] ApiProjectionsContext context,
+            CancellationToken cancellationToken = default)
+        {
+            var filtering = Request.ExtractFilteringRequest<ExampleAggregateListFilter>();
+            var sorting = Request.ExtractSortingRequest();
+            var pagination = Request.ExtractPaginationRequest();
+
+            var pagedExampleAggregates = new ExampleAggregateListQuery(context)
+                .Fetch(filtering, sorting, pagination);
+
+            Response.AddPagedQueryResultHeaders(pagedExampleAggregates);
+
+            return Ok(
+                new ExampleAggregateListResponse
+                {
+                    ExampleAggregates = await pagedExampleAggregates
+                        .Items
+                        .Select(x => new ExampleAggregateListItemResponse(x))
+                        .ToListAsync(cancellationToken)
+                });
+        }
+
         /// <summary>
         /// Get details of the example aggregate.
         /// </summary>

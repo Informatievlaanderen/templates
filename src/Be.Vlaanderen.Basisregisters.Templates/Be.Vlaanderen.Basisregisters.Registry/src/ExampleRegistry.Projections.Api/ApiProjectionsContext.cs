@@ -9,6 +9,7 @@ namespace ExampleRegistry.Projections.Api
         public override string ProjectionStateSchema => Schema.Api;
 
         public DbSet<ExampleAggregateDetail.ExampleAggregateDetail> ExampleAggregateDetails { get; set; }
+        public DbSet<ExampleAggregateList.ExampleAggregateList> ExampleAggregateList { get; set; }
 
         // This needs to be here to please EF
         public ApiProjectionsContext() { }
