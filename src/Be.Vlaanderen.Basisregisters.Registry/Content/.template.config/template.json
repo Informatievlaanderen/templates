@@ -48,9 +48,9 @@
       "defaultValue": "",
       "replaces":"Example"
     },
-    "GenerateExample":{
+    "ExcludeExample":{
       "type": "computed",
-      "value": "(MainAggregate != \"\")"
+      "value": "(MainAggregate == \"\")"
     },
 
     "HttpsEverywhere": {
@@ -106,7 +106,7 @@
   {
     "modifiers": [
     {
-      "condition": "(!GenerateExample)",
+      "condition": "(ExcludeExample)",
       "exclude": [
         "src/ExampleRegistry/ExampleAggregate/**",
         "src/ExampleRegistry/Exceptions/**",

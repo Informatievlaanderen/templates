@@ -33,18 +33,20 @@ namespace ExampleRegistry.Tests
         }
 
         [Fact]
-        public void domain_should_not_be_duplicated()
+        public void should_be_named_twice()
         {
             var id = Fixture.Create<ExampleAggregateId>();
             var name = Fixture.Create<ExampleAggregateName>();
-            var command = new NameExampleAggregate(id, name);
+            var name2 = Fixture.Create<ExampleAggregateName>();
+            var command = new NameExampleAggregate(id, name2);
 
             Assert(new Scenario()
                 .Given(id,
                     new ExampleAggregateWasBorn(id),
                     new ExampleAggregateWasNamed(id, name))
                 .When(command)
-                .Throws(new WrongExpectedVersionException($"Append failed due to WrongExpectedVersion.Stream: {id}, Expected version: -1")));
+                .Then(command.ExampleAggregateId,
+                    new ExampleAggregateWasNamed(command.ExampleAggregateId, command.ExampleAggregateName)));
         }
     }
 }
