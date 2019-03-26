@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Test.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ExampleRegistry\ExampleRegistry.csproj" />
+    <ProjectReference Include="..\..\src\ExampleRegistry.Infrastructure\ExampleRegistry.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

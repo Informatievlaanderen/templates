@@ -1,0 +1,24 @@
+type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.ExampleRegistry.Api
+title Be.Vlaanderen.Basisregisters.ExampleRegistry.Api
+
+authors Basisregisters Vlaanderen
+owners agentschap Informatie Vlaanderen <https://vlaanderen.be/informatie-vlaanderen>
+copyright Copyright (c) agentschap Informatie Vlaanderen
+requireLicenseAcceptance false
+projectUrl https://github.com/informatievlaanderen/example-registry
+iconUrl https://raw.githubusercontent.com/informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+
+description Example Registry.
+
+files
+  ExampleRegistry.Api.dll => lib\netcoreapp2.2
+  ExampleRegistry.Api.pdb => lib\netcoreapp2.2
+  ExampleRegistry.Api.xml => lib\netcoreapp2.2
+  ExampleRegistry.Api.xml => content
+
+  ExampleRegistry.dll => lib\netcoreapp2.2
+  ExampleRegistry.pdb => lib\netcoreapp2.2

@@ -1,0 +1,51 @@
+type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.Templates
+title Be.Vlaanderen.Basisregisters.Templates
+
+authors Basisregisters Vlaanderen
+owners agentschap Informatie Vlaanderen <https://vlaanderen.be/informatie-vlaanderen>
+copyright Copyright (c) agentschap Informatie Vlaanderen
+requireLicenseAcceptance false
+projectUrl https://github.com/informatievlaanderen/templates
+iconUrl https://raw.githubusercontent.com/informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+language en-US
+packageTypes Template
+
+description agentschap Informatie Vlaanderen .NET Core templates.
+
+files
+  Content/**/* => content
+
+  !Content/**/appsettings.*.json
+  !Content/**/*.suo
+  !Content/**/*.user
+  !Content/**/*.sln.docstates
+  !Content/**/*.trx
+  !Content/**/tracing*.log
+
+  !Content/.fake/**/*
+  !Content/.vs/**/*
+  !Content/dist/**/*
+  !Content/node_modules/**/*
+  !Content/packages/**/*
+  !Content/paket-files/**/*
+  !Content/docs/ExampleRegistry.Structurizr/bin/**/*
+  !Content/docs/ExampleRegistry.Structurizr/obj/**/*
+  !Content/src/EF.MigrationsHelper/bin/**/*
+  !Content/src/EF.MigrationsHelper/obj/**/*
+  !Content/src/ExampleRegistry/bin/**/*
+  !Content/src/ExampleRegistry/obj/**/*
+  !Content/src/ExampleRegistry.Api/bin/**/*
+  !Content/src/ExampleRegistry.Api/obj/**/*
+  !Content/src/ExampleRegistry.Infrastructure/bin/**/*
+  !Content/src/ExampleRegistry.Infrastructure/obj/**/*
+  !Content/src/ExampleRegistry.Projections.Api/bin/**/*
+  !Content/src/ExampleRegistry.Projections.Api/obj/**/*
+  !Content/src/ExampleRegistry.Projector/bin/**/*
+  !Content/src/ExampleRegistry.Projector/obj/**/*
+  !Content/test/ExampleRegistry.Tests/bin/**/*
+  !Content/test/ExampleRegistry.Tests/obj/**/*
+  !Content/test/ExampleRegistry.Tests/TestResults/**/*

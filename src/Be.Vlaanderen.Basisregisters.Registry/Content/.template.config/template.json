@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Basisregisters Vlaanderen",
+  "classifications": ["Basisregisters Vlaanderen", "agentschap Informatie Vlaanderen", "Basisregister"],
+  "name": "Basisregisters Vlaanderen Base Registry",
+  "identity": "Be.Vlaanderen.Basisregisters.ExampleRegistry",
+  "description": "A professional .NET Core project setup including build scripts, documentation, unit tests, and performance tests for a class library project.",
+  "shortName": "be-registry",
+  "groupIdentity": "Basisregisters Vlaanderen",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ExampleRegistry",
+  "primaryOutputs": [
+  {
+    "path": "ExampleRegistry.sln"
+  }],
+  "defaultName": "Registry1",
+  "preferNameDirectory": false,
+  "guids": [
+    "e7c5e22c-b620-463d-8ff3-292c95673370",
+    "148c9c44-ac1d-411c-a13f-908a9c7009e1",
+    "734f3529-02f5-44c5-84e3-681c28f7de26"
+  ],
+  "placeholderFilename": "placeholder",
+  "symbols": {
+    "CopyrightName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Copyright name to use.",
+      "defaultValue": "John Smith",
+      "replaces":"(copyright)"
+    },
+
+    "FullName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Full name of the registry.",
+      "defaultValue": "Your title",
+      "replaces":"My App Title"
+    },
+
+    "MainAggregate": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Main aggregate of the registry, adds an example aggregate, command handler, value objects, exceptions and controller.",
+      "defaultValue": "",
+      "replaces":"Example"
+    },
+
+    "HttpsEverywhere": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Use the HTTPS scheme and TLS security across the entire registry.",
+      "defaultValue": "true"
+    },
+
+    "HttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
+    },
+    "HttpPortGenerated": {
+      "type": "generated",
+      "generator": "port"
+    },
+    "HttpPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpPort",
+        "fallbackVariableName": "HttpPortGenerated"
+      },
+      "replaces": "43300"
+    },
+
+    "HttpsPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTPS endpoint in launchSettings.json."
+    },
+    "HttpsPortGenerated": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 44300,
+        "high": 44399
+      }
+    },
+    "HttpsPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpsPort",
+        "fallbackVariableName": "HttpsPortGenerated"
+      },
+      "replaces": "44300"
+    }
+  },
+  "sources": [
+  {
+    "modifiers": [
+    {
+      "condition": "(MainAggregate == '')",
+      "exclude": [
+        "src/ExampleRegistry/Example/**",
+        "src/ExampleRegistry/ValueObjects/**",
+        "src/ExampleRegistry/Exceptions/**",
+        "src/ExampleRegistry.Api/Example/**"
+      ]
+    },
+    {
+      "condition": "(!HttpsEverywhere)",
+      "exclude": [
+        "docs/ssl/**",
+        "src/ExampleRegistry.Api/example.pfx",
+        "src/ExampleRegistry.Projector/example.pfx"
+      ]
+    }]
+  }]
+}
