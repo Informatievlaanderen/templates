@@ -32,8 +32,13 @@ dotnet new be-registry --dry-run
 
 ```bash
 dotnet new be-registry \
-       -n UserRegistry \
-       -aggregate User
+       -n SandwichStore \
+       -aggregate Sandwich \
+       -desc "Backend for the exira.com sandwich store." \
+       -company exira.com \
+       -email info@exira.com \
+       -site https://exira.com \
+       -gh-org exira
 
 The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```
@@ -42,10 +47,10 @@ The template "Basisregisters Vlaanderen Registry" was created successfully.
 dotnet new be-registry \
        -n PublicServiceRegistry \
        -aggregate PublicService \
-       -desc "Authentic base registry containing public services of Flanders."
-       -company "agentschap Informatie Vlaanderen"
-       -email "informatie.vlaanderen@vlaanderen.be"
-       -site "https://vlaanderen.be/informatie-vlaanderen"
+       -desc "Authentic base registry containing public services of Flanders." \
+       -company "agentschap Informatie Vlaanderen" \
+       -email informatie.vlaanderen@vlaanderen.be \
+       -site https://vlaanderen.be/informatie-vlaanderen
 
 The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```
