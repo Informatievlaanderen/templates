@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2.0-runtime-deps
+FROM microsoft/dotnet:2.2.3-runtime-deps
 
 LABEL maintainer "agentschap Informatie Vlaanderen <informatie.vlaanderen@vlaanderen.be>"
 
@@ -8,4 +8,4 @@ WORKDIR /app
 EXPOSE 5000/tcp
 ENV ASPNETCORE_URLS http://*:5000
 
-ENTRYPOINT ["./PublicServiceRegistry.Api.Projector"]
+ENTRYPOINT ["./ExampleRegistry.Api.Projector"]

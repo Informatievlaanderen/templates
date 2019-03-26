@@ -2,11 +2,11 @@
   "name": "example-registry",
   "version": "0.0.1",
   "description": "Write a short summary of the business goal of this registry.",
-  "author": "Basisregisters Vlaanderen",
+  "author": "agentschap Informatie Vlaanderen",
   "license": "EUPL-1.2",
   "repository": {
     "type": "git",
-    "url": "git@github.com:informatievlaanderen/example-registry.git"
+    "url": "git@github.com:github-organisation/example-registry.git"
   },
   "dependencies": {},
   "devDependencies": {

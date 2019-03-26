@@ -35,7 +35,7 @@ namespace ExampleRegistry.Api.Infrastructure
                     (provider, description) => new Info
                     {
                         Version = description.ApiVersion.ToString(),
-                        Title = "ExampleRegistry API",
+                        Title = "Example Registry API",
                         Description = GetApiLeadingText(description),
                         Contact = new Contact
                         {
@@ -66,7 +66,7 @@ namespace ExampleRegistry.Api.Infrastructure
             IApiVersionDescriptionProvider apiVersionProvider,
             MsSqlStreamStore streamStore)
         {
-            // StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
+            StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
 
             app.UseDefaultForApi(new StartupOptions
             {
@@ -78,12 +78,12 @@ namespace ExampleRegistry.Api.Infrastructure
                 Api =
                 {
                     VersionProvider = apiVersionProvider,
-                    Info = groupName => $"Basisregisters Vlaanderen - Example Registry API {groupName}"
+                    Info = groupName => $"Example Registry API {groupName}"
                 },
                 Server =
                 {
                     PoweredByName = "Vlaamse overheid - Basisregisters Vlaanderen",
-                    ServerName = "Vlaamse overheid"
+                    ServerName = "agentschap Informatie Vlaanderen"
                 },
                 MiddlewareHooks =
                 {
@@ -93,6 +93,6 @@ namespace ExampleRegistry.Api.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Basisregisters Vlaanderen Example Registry API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
+            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Example Registry API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
     }
 }

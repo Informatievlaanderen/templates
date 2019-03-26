@@ -41,7 +41,11 @@ The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```bash
 dotnet new be-registry \
        -n PublicServiceRegistry \
-       -aggregate PublicService
+       -aggregate PublicService \
+       -desc "Authentic base registry containing public services of Flanders."
+       -company "agentschap Informatie Vlaanderen"
+       -email "informatie.vlaanderen@vlaanderen.be"
+       -site "https://vlaanderen.be/informatie-vlaanderen"
 
 The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```

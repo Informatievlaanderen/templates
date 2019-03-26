@@ -45,13 +45,13 @@ namespace ExampleRegistry.Projector.Infrastructure
                     (provider, description) => new Info
                     {
                         Version = description.ApiVersion.ToString(),
-                        Title = "Basisregisters Vlaanderen Example Registry API",
+                        Title = "Example Registry Projector API",
                         Description = GetApiLeadingText(description),
                         Contact = new Contact
                         {
-                            Name = "Informatie Vlaanderen",
+                            Name = "agentschap Informatie Vlaanderen",
                             Email = "informatie.vlaanderen@vlaanderen.be",
-                            Url = "https://legacy.basisregisters.vlaanderen"
+                            Url = "https://vlaanderen.be/informatie-vlaanderen"
                         }
                     },
                     new[]
@@ -102,7 +102,7 @@ namespace ExampleRegistry.Projector.Infrastructure
                 Api =
                 {
                     VersionProvider = apiVersionProvider,
-                    Info = groupName => $"Basisregisters Vlaanderen - Example Registry API {groupName}"
+                    Info = groupName => $"Example Registry Projector API {groupName}"
                 },
                 MiddlewareHooks =
                 {
@@ -115,6 +115,6 @@ namespace ExampleRegistry.Projector.Infrastructure
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
-            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Basisregisters Vlaanderen Example Registry API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
+            => $"Momenteel leest u de documentatie voor versie {description.ApiVersion} van de Example Registry Projector API{string.Format(description.IsDeprecated ? ", **deze API versie is niet meer ondersteund * *." : ".")}";
     }
 }

@@ -34,9 +34,9 @@ TODO: More to come :)
 
 ### Generating documentation
 
-We use Structurizr to generate our documentation and populate our architecture decisions. All of this can be found in the [Structurizr](https://github.com/informatievlaanderen/example-registry/tree/master/docs/ExampleRegistry.Structurizr) console application.
+We use Structurizr to generate our documentation and populate our architecture decisions. All of this can be found in the [Structurizr](https://github.com/github-organisation/example-registry/tree/master/docs/ExampleRegistry.Structurizr) console application.
 
-To run it, make sure you have an `appsettings.json` with a structurizr.com `WorkspaceId`, `ApiKey` and `ApiSecret`. If you have moved your [adr's](https://github.com/informatievlaanderen/example-registry/tree/master/docs/adr) to another location, don't forget to update `AdrPath`.
+To run it, make sure you have an `appsettings.json` with a structurizr.com `WorkspaceId`, `ApiKey` and `ApiSecret`. If you have moved your [adr's](https://github.com/github-organisation/example-registry/tree/master/docs/adr) to another location, don't forget to update `AdrPath`.
 
 This is how the generated documentation looks: https://structurizr.com/share/37794
 

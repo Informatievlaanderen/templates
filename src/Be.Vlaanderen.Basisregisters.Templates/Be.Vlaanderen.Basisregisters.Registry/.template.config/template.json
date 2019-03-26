@@ -19,18 +19,53 @@
   "defaultName": "Registry1",
   "preferNameDirectory": false,
   "guids": [
+    "476f928e-6830-462f-a8a0-04bc3d8de2bb",
     "e7c5e22c-b620-463d-8ff3-292c95673370",
     "148c9c44-ac1d-411c-a13f-908a9c7009e1",
-    "734f3529-02f5-44c5-84e3-681c28f7de26"
+    "734f3529-02f5-44c5-84e3-681c28f7de26",
+    "0417aad5-5c19-4a09-b523-cdb4864ad545",
+    "13936a7a-6ba9-497e-9d96-35a956548c76"
   ],
   "placeholderFilename": "placeholder",
   "symbols": {
-    "CopyrightName": {
+    "GitHubOrganisation": {
       "type": "parameter",
       "datatype": "string",
-      "description": "Copyright name to use.",
-      "defaultValue": "John Smith",
-      "replaces":"(copyright)"
+      "description": "GitHub organisation to use (typically found at https://github.com/<organisation-name>).",
+      "defaultValue": "informatievlaanderen",
+      "replaces": "github-organisation"
+    },
+
+    "RegistryDescription": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "A short summary of this registry to go in the readme.",
+      "defaultValue": "Write a short summary of the business goal of this registry.",
+      "replaces": "Write a short summary of the business goal of this registry."
+    },
+
+    "CompanyName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The company name, to be used in documentation and assembly.",
+      "defaultValue": "agentschap Informatie Vlaanderen",
+      "replaces": "agentschap Informatie Vlaanderen"
+    },
+
+    "CompanyEmail": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The company email address, to be used in documentation.",
+      "defaultValue": "informatie.vlaanderen@vlaanderen.be",
+      "replaces": "informatie.vlaanderen@vlaanderen.be"
+    },
+
+    "CompanySite": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The company website, to be used in documentation.",
+      "defaultValue": "https://vlaanderen.be/informatie-vlaanderen",
+      "replaces": "https://vlaanderen.be/informatie-vlaanderen"
     },
 
     "NameCamelCase": {

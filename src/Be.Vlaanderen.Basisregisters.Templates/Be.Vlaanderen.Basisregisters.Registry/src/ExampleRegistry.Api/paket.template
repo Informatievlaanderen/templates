@@ -4,11 +4,11 @@ version 1.0.0
 id Be.Vlaanderen.Basisregisters.ExampleRegistry.Api
 title Be.Vlaanderen.Basisregisters.ExampleRegistry.Api
 
-authors Basisregisters Vlaanderen
+authors agentschap Informatie Vlaanderen
 owners agentschap Informatie Vlaanderen <https://vlaanderen.be/informatie-vlaanderen>
 copyright Copyright (c) agentschap Informatie Vlaanderen
 requireLicenseAcceptance false
-projectUrl https://github.com/informatievlaanderen/example-registry
+projectUrl https://github.com/github-organisation/example-registry
 iconUrl https://raw.githubusercontent.com/informatievlaanderen/build-pipeline/master/logo.png
 licenseUrl https://opensource.org/licenses/EUPL-1.2
 

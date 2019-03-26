@@ -126,7 +126,7 @@ namespace ExampleRegistry.Structurizr
                     "Het `voorbeeld register laat gebruikers toe alle authentieke gegevens van een voorbeeld te raadplegen.");
 
             exampleRegistry.Id = SoftwareSystemExampleRegistryId;
-            exampleRegistry.Url = "https://github.com/informatievlaanderen/example-registry";
+            exampleRegistry.Url = "https://github.com/github-organisation/example-registry";
 
             return exampleRegistry;
         }

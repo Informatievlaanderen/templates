@@ -1,8 +1,28 @@
 {
   "symbolInfo": {
-    "CopyrightName": {
-      "longName": "copyright-name",
-      "shortName": "copy"
+    "GitHubOrganisation": {
+      "longName": "github-organisation",
+      "shortName": "gh-org"
+    },
+
+    "RegistryDescription": {
+      "longName": "registry-description",
+      "shortName": "desc"
+    },
+
+    "CompanyName": {
+      "longName": "company-name",
+      "shortName": "company"
+    },
+
+    "CompanyEmail": {
+      "longName": "company-email",
+      "shortName": "email"
+    },
+
+    "CompanySite": {
+      "longName": "company-site",
+      "shortName": "site"
     },
 
     "MainAggregate": {
