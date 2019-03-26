@@ -48,6 +48,10 @@
       "defaultValue": "",
       "replaces":"Example"
     },
+    "GenerateExample":{
+      "type": "computed",
+      "value": "(MainAggregate != \"\")"
+    },
 
     "HttpsEverywhere": {
       "type": "parameter",
@@ -102,12 +106,15 @@
   {
     "modifiers": [
     {
-      "condition": "(MainAggregate == '')",
+      "condition": "(!GenerateExample)",
       "exclude": [
-        "src/ExampleRegistry/Example/**",
-        "src/ExampleRegistry/ValueObjects/**",
+        "src/ExampleRegistry/ExampleAggregate/**",
         "src/ExampleRegistry/Exceptions/**",
-        "src/ExampleRegistry.Api/Example/**"
+        "src/ExampleRegistry/ValueObjects/**",
+        "src/ExampleRegistry.Api/ExampleAggregate/**",
+        "src/ExampleRegistry.Infrastructure/Repositories/ExampleAggregates.cs",
+        "test/ExampleRegistry.Tests/Infrastructure/Customizations-ExampleAggregate.cs",
+        "test/ExampleRegistry.Tests/*Tests.cs"
       ]
     },
     {

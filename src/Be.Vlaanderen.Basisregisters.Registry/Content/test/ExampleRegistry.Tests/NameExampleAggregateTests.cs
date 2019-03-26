@@ -1,0 +1,50 @@
+namespace ExampleRegistry.Tests
+{
+    using AutoFixture;
+    using Be.Vlaanderen.Basisregisters.AggregateSource.Testing;
+    using ExampleAggregate.Commands;
+    using ExampleAggregate.Events;
+    using Infrastructure;
+    using SqlStreamStore.Streams;
+    using Xunit;
+    using Xunit.Abstractions;
+
+    public class NameExampleAggregateTests : ExampleRegistryTest
+    {
+        public Fixture Fixture { get; }
+
+        public NameExampleAggregateTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        {
+            Fixture = new Fixture();
+            Fixture.CustomizeExampleAggregateName();
+        }
+
+        [Fact]
+        public void should_have_been_created()
+        {
+            var command = Fixture.Create<NameExampleAggregate>();
+
+            Assert(new Scenario()
+                .GivenNone()
+                .When(command)
+                .Then(command.ExampleAggregateId,
+                    new ExampleAggregateWasBorn(command.ExampleAggregateId),
+                    new ExampleAggregateWasNamed(command.ExampleAggregateId, command.ExampleAggregateName)));
+        }
+
+        [Fact]
+        public void domain_should_not_be_duplicated()
+        {
+            var id = Fixture.Create<ExampleAggregateId>();
+            var name = Fixture.Create<ExampleAggregateName>();
+            var command = new NameExampleAggregate(id, name);
+
+            Assert(new Scenario()
+                .Given(id,
+                    new ExampleAggregateWasBorn(id),
+                    new ExampleAggregateWasNamed(id, name))
+                .When(command)
+                .Throws(new WrongExpectedVersionException($"Append failed due to WrongExpectedVersion.Stream: {id}, Expected version: -1")));
+        }
+    }
+}

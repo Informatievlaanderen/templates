@@ -6,6 +6,8 @@ namespace ExampleRegistry
 
     public class ExampleAggregateName : ValueObject<ExampleAggregateName>
     {
+        public const int MaxLength = 200;
+
         public string Name { get; }
 
         public Language Language { get; }
@@ -14,6 +16,9 @@ namespace ExampleRegistry
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new NoExampleAggregateNameException();
+
+            if (name.Length > MaxLength)
+                throw new ExampleAggregateNameTooLongException();
 
             Name = name;
             Language = language;
