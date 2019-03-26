@@ -70,6 +70,7 @@ nuget Structurizr.AdrTools 0.9.0
 
 // TEST STUFF
 nuget Microsoft.NET.Test.Sdk 16.0.1
+nuget Microsoft.AspNetCore.TestHost 2.2.0
 nuget Microsoft.EntityFrameworkCore.InMemory 2.2.3
 nuget xunit 2.4.1
 nuget xunit.runner.visualstudio 2.4.1
