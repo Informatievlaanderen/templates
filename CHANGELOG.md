@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/informatievlaanderen/templates/compare/v1.1.0...v1.1.1) (2019-03-28)
+
+
+### Bug Fixes
+
+* correct description and add more examples to readme ([189a531](https://github.com/informatievlaanderen/templates/commit/189a531))
+
 # [1.1.0](https://github.com/informatievlaanderen/templates/compare/v1.0.0...v1.1.0) (2019-03-28)
 
 
