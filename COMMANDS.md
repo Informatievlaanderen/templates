@@ -69,3 +69,19 @@ mono .paket/paket.exe pack --template src/Be.Vlaanderen.Basisregisters.Templates
 dotnet new -u Be.Vlaanderen.Basisregisters.Templates; \
 dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.0.0.1-beta.nupkg;
 ```
+
+# Example appsettings.xxx.json
+
+```json
+{
+  "ConnectionStrings": {
+    "Events": "Server=.;Database=example-registry-dev;Trusted_Connection=True;",
+    "ApiProjections": "Server=.;Database=example-registry-dev;Trusted_Connection=True;",
+    "ApiProjectionsAdmin": "Server=.;Database=example-registry-dev;Trusted_Connection=True;"
+  },
+
+  "DataDog": {
+    "Enabled": false
+  }
+}
+```

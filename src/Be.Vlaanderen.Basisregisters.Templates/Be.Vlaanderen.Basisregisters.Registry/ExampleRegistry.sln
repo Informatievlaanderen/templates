@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{453A56
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		docs\appsettings-example.json = docs\appsettings-example.json
 		build.fsx = build.fsx
 		global.json = global.json
 		LICENSE = LICENSE
