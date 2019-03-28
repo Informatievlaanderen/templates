@@ -37,7 +37,7 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
             new UpdateExampleAggregateRequest
             {
                 Id = Guid.NewGuid(),
-                Name =
+                Name = new ExampleAggregateName
                 {
                     Name = "Iets!",
                     Language = Language.Dutch

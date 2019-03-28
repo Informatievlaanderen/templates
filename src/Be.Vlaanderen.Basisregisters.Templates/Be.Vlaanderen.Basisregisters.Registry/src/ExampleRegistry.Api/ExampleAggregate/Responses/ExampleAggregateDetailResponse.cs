@@ -13,7 +13,7 @@ namespace ExampleRegistry.Api.ExampleAggregate.Responses
     {
         /// <summary>Id of the example aggregate.</summary>
         [DataMember(Name = "Id", Order = 1)]
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Hypermedia links
