@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/informatievlaanderen/templates/compare/v1.0.0...v1.1.0) (2019-03-28)
+
+
+### Bug Fixes
+
+* do not replace password for development pfx ([573a232](https://github.com/informatievlaanderen/templates/commit/573a232))
+* make sure swagger documentation works for example aggregate ([be0a8da](https://github.com/informatievlaanderen/templates/commit/be0a8da))
+
+
+### Features
+
+* add example appsettings with integrated security connection string ([63cc778](https://github.com/informatievlaanderen/templates/commit/63cc778))
+
 # 1.0.0 (2019-03-28)
 
 
