@@ -17,8 +17,8 @@ namespace ExampleRegistry.Projector.Infrastructure
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
             => new WebHostBuilder()
                 .UseDefaultForApi<Startup>(
-                    httpPort: 3090,
-                    httpsPort: 3444,
+                    httpPort: 8100,
+                    httpsPort: 9100,
                     httpsCertificate: () => new X509Certificate2(DevelopmentCertificate.Name, DevelopmentCertificate.Key),
                     commandLineArgs: args);
     }
