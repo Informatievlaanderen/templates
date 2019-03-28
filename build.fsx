@@ -45,7 +45,7 @@ open ``Build-generic``
 // Push
 // Executes `docker push` to push the built images to the registry.
 
-let packTemplate =
+let packTemplate _ =
   let nugetVersion = sprintf "%s" buildNumber
   Paket.Pack(fun p ->
     { p with
@@ -56,7 +56,7 @@ let packTemplate =
     }
   )
 
-Target "Pack_Template" (fun _ -> packTemplate)
+Target "Pack_Template" (fun _ -> packTemplate ())
 
 Target "Pack" DoNothing
 
