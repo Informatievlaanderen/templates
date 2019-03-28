@@ -1,6 +1,5 @@
 namespace ExampleRegistry.Api.Infrastructure
 {
-    using System;
     using System.Security.Cryptography.X509Certificates;
     using Microsoft.AspNetCore.Hosting;
     using Be.Vlaanderen.Basisregisters.Api;
@@ -10,7 +9,7 @@ namespace ExampleRegistry.Api.Infrastructure
         private static class DevelopmentCertificate
         {
             internal const string Name = "localhost.pfx";
-            internal const string Key = "example-registry!";
+            internal const string Key = "dev-pfx-password";
         }
 
         public static void Main(string[] args) => CreateWebHostBuilder(args).Build().Run();

@@ -449,6 +449,13 @@
         "fallbackVariableName": "HttpsProjectorPortGenerated"
       },
       "replaces": "9100"
+    },
+
+    "DevelopmentPfxPassword": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": { "value": "example-registry!" },
+      "replaces": "dev-pfx-password"
     }
   },
   "sources": [
