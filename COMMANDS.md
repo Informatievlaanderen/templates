@@ -13,7 +13,7 @@ dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.1.0.0.nupkg
 # Install a beta version from nuget.org
 
 ```bash
-dotnet new -i Be.Vlaanderen.Basisregisters.Templates::0.0.1-beta
+dotnet new -i Be.Vlaanderen.Basisregisters.Templates::0.0.2-beta
 ```
 
 # Uninstall the template
