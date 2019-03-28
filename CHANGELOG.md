@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/informatievlaanderen/templates/compare/v1.1.1...v1.1.2) (2019-03-28)
+
+
+### Bug Fixes
+
+* use generated http/https ports in Program.cs ([4f5945b](https://github.com/informatievlaanderen/templates/commit/4f5945b))
+
 ## [1.1.1](https://github.com/informatievlaanderen/templates/compare/v1.1.0...v1.1.1) (2019-03-28)
 
 
