@@ -48,21 +48,14 @@ namespace ExampleRegistry.Projections.Api.Tests
         [Fact]
         public Task when_example_aggregates_are_named()
         {
-            var existingRecords = _fixture
-                .CreateMany<Guid>(new Random().Next(1, 100))
-                .Select(x => new ExampleAggregateDetail { Id = x })
+            var previousEvents = _fixture
+                .CreateMany<ExampleAggregateWasBorn>(new Random().Next(1, 100))
                 .ToList();
 
-            var previousEvents = existingRecords
-                .Select(x =>
-                    new ExampleAggregateWasBorn(
-                        new ExampleAggregateId(x.Id)))
-                .ToList();
-
-            var events = existingRecords
+            var events = previousEvents
                 .Select(x =>
                     new ExampleAggregateWasNamed(
-                        new ExampleAggregateId(x.Id),
+                        new ExampleAggregateId(x.ExampleAggregateId),
                         _fixture.Create<ExampleAggregateName>()))
                 .ToList();
 
