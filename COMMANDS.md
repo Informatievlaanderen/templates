@@ -10,6 +10,12 @@ mono .paket/paket.exe pack --template src/Be.Vlaanderen.Basisregisters.Templates
 dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.1.0.0.nupkg
 ```
 
+# Install a beta version from nuget.org
+
+```bash
+dotnet new -i Be.Vlaanderen.Basisregisters.Templates::0.0.1-beta
+```
+
 # Uninstall the template
 
 ```bash
@@ -61,5 +67,5 @@ The template "Basisregisters Vlaanderen Registry" was created successfully.
 rm -rf dist/; \
 mono .paket/paket.exe pack --template src/Be.Vlaanderen.Basisregisters.Templates/paket.template dist; \
 dotnet new -u Be.Vlaanderen.Basisregisters.Templates; \
-dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.1.0.0.nupkg;
+dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.0.0.1-beta.nupkg;
 ```

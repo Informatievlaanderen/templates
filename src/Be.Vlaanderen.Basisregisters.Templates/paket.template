@@ -1,5 +1,5 @@
 type file
-version 1.0.0
+version 0.0.1-beta
 
 id Be.Vlaanderen.Basisregisters.Templates
 title Be.Vlaanderen.Basisregisters.Templates
@@ -46,6 +46,12 @@ files
   !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projections.Api/obj/**/*
   !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projector/bin/**/*
   !Be.Vlaanderen.Basisregisters.Registry/src/ExampleRegistry.Projector/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Api.Tests/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Api.Tests/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Api.Tests/TestResults/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Projections.Api.Tests/bin/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Projections.Api.Tests/obj/**/*
+  !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Projections.Api.Tests/TestResults/**/*
   !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Tests/bin/**/*
   !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Tests/obj/**/*
   !Be.Vlaanderen.Basisregisters.Registry/test/ExampleRegistry.Tests/TestResults/**/*
