@@ -8,27 +8,33 @@
 
 Install [Be.Vlaanderen.Basisregisters.Templates](https://www.nuget.org/packages/Be.Vlaanderen.Basisregisters.Templates/) and have a look at the `be-registry` template:
 
-```bash
-dotnet new -i Be.Vlaanderen.Basisregisters.Templates
-dotnet new be-registry -h
+```console
+$ dotnet new -i Be.Vlaanderen.Basisregisters.Templates
+> Installing Be.Vlaanderen.Basisregisters.Templates 1.1.0.
+
+$ dotnet new be-registry -h
+> Basisregisters Vlaanderen Registry (C#)
+> Author: Basisregisters Vlaanderen
+> Description: A professional .NET Core project setup including build scripts, documentation and unit tests for an event-sourced project.
 ```
 
 To create a new registry, in this case a registry containing public services, run:
 
-```bash
-dotnet new be-registry \
+```console
+$ dotnet new be-registry \
        -n PublicServiceRegistry \
        -aggregate PublicService \
        -desc "Authentic base registry containing public services of Flanders." \
        -company "agentschap Informatie Vlaanderen" \
        -email informatie.vlaanderen@vlaanderen.be \
        -site https://vlaanderen.be/informatie-vlaanderen
+> The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```
 
 This can also be used to bootstrap any event-sourced applications accessible via an API:
 
-```bash
-dotnet new be-registry \
+```console
+$ dotnet new be-registry \
        -n SandwichStore \
        -aggregate Sandwich \
        -desc "Backend for the exira.com sandwich store." \
@@ -36,12 +42,41 @@ dotnet new be-registry \
        -email info@exira.com \
        -site https://exira.com \
        -gh-org exira
+> The template "Basisregisters Vlaanderen Registry" was created successfully.
+```
+
+Afterwards, you can run `build.sh` to compile everything and have a ready to go project. It is possible you will have to make `build.sh` executable first.
+
+```console
+$ chmod +x build.sh
+$ ./build.sh
+> Paket version 5.198.0
+>
+> ... a lot of build output ...
+>
+> ---------------------------------------------------------------------
+> Build Time Report
+> ---------------------------------------------------------------------
+> Target             Duration
+> ------             --------
+> NpmInstall         00:00:22.1432580
+> DotNetCli          00:00:00.3928220
+> Clean              00:00:00.0154320
+> Restore_Solution   00:00:15.3776050
+> Build_Solution     00:00:23.8466700
+> Build              00:00:00.0001190
+> Test_Solution      00:00:12.4589250
+> Test               00:00:00.0002850
+> Total:             00:01:14.3630510
+> ---------------------------------------------------------------------
+> Status:            Ok
+> ---------------------------------------------------------------------
 ```
 
 To remove everything, run:
 
-```bash
-dotnet new -u Be.Vlaanderen.Basisregisters.Templates
+```console
+$ dotnet new -u Be.Vlaanderen.Basisregisters.Templates
 ```
 
 ## License
