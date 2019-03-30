@@ -1,6 +1,7 @@
 namespace ExampleRegistry.Api.Tests.Infrastructure
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using Api.Infrastructure;
@@ -31,23 +32,49 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
         /// <param name="services">The collection of services to configure the application with.</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            const string defaultCulture = "en-GB";
+            const string supportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
+
             services
-                .ConfigureDefaultForApi<Startup>(
-                    (provider, description) => new Info
+                .ConfigureDefaultForApi<Startup, SharedResources>(new StartupConfigureOptions
+                {
+                    Cors =
                     {
-                        Version = description.ApiVersion.ToString(),
-                        Title = "Example Registry API",
-                        Description = GetApiLeadingText(description),
-                        Contact = new Contact
-                        {
-                            Name = "agentschap Informatie Vlaanderen",
-                            Email = "informatie.vlaanderen@vlaanderen.be",
-                            Url = "https://vlaanderen.be/informatie-vlaanderen"
-                        }
+                        Headers = _configuration
+                            .GetSection("Cors")
+                            .GetChildren()
+                            .Select(c => c.Value)
+                            .ToArray()
                     },
-                    new[] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name, },
-                    corsHeaders: _configuration.GetSection("Cors").GetChildren().Select(c => c.Value).ToArray(),
-                    configureFluentValidation: fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                    Swagger =
+                    {
+                        ApiInfo = (provider, description) => new Info
+                        {
+                            Version = description.ApiVersion.ToString(),
+                            Title = "Example Registry API",
+                            Description = GetApiLeadingText(description),
+                            Contact = new Contact
+                            {
+                                Name = "agentschap Informatie Vlaanderen",
+                                Email = "informatie.vlaanderen@vlaanderen.be",
+                                Url = "https://vlaanderen.be/informatie-vlaanderen"
+                            }
+                        },
+                        XmlCommentPaths = new [] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name }
+                    },
+                    Localization =
+                    {
+                        DefaultCulture = new CultureInfo(defaultCulture),
+                        SupportedCultures = supportedCultures
+                            .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                            .Select(x => new CultureInfo(x))
+                            .ToArray()
+                    },
+                    MiddlewareHooks =
+                    {
+                        FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>()
+                    }
+                });
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
@@ -64,13 +91,16 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider)
         {
-            app.UseDefaultForApi(new StartupOptions
+            app.UseDefaultForApi(new StartupUseOptions
             {
-                ApplicationContainer = _applicationContainer,
-                ServiceProvider = serviceProvider,
-                HostingEnvironment = env,
-                ApplicationLifetime = appLifetime,
-                LoggerFactory = loggerFactory,
+                Common =
+                {
+                    ApplicationContainer = _applicationContainer,
+                    ServiceProvider = serviceProvider,
+                    HostingEnvironment = env,
+                    ApplicationLifetime = appLifetime,
+                    LoggerFactory = loggerFactory,
+                },
                 Api =
                 {
                     VersionProvider = apiVersionProvider,
