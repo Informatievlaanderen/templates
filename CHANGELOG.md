@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/informatievlaanderen/templates/compare/v1.1.2...v1.2.0) (2019-03-30)
+
+
+### Features
+
+* add localization ([f5e1312](https://github.com/informatievlaanderen/templates/commit/f5e1312))
+
 ## [1.1.2](https://github.com/informatievlaanderen/templates/compare/v1.1.1...v1.1.2) (2019-03-28)
 
 
