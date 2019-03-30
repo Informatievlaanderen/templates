@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/informatievlaanderen/templates/compare/v1.2.0...v1.2.1) (2019-03-30)
+
+
+### Bug Fixes
+
+* use correct namespace for projection shared resources ([6c8e7ce](https://github.com/informatievlaanderen/templates/commit/6c8e7ce))
+
 # [1.2.0](https://github.com/informatievlaanderen/templates/compare/v1.1.2...v1.2.0) (2019-03-30)
 
 
