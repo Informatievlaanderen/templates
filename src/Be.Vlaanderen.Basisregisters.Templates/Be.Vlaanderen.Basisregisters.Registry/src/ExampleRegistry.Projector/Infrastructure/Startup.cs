@@ -4,7 +4,6 @@ namespace ExampleRegistry.Projector.Infrastructure
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using Api.Projector;
     using Be.Vlaanderen.Basisregisters.Api;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.AspNetCore;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac;

@@ -1,4 +1,4 @@
-namespace ExampleRegistry.Api.Projector
+namespace ExampleRegistry.Projector
 {
     public class SharedResources { }
 }
