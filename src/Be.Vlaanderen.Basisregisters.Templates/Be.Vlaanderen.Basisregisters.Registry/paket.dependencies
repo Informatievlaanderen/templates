@@ -26,6 +26,9 @@ nuget Microsoft.Extensions.Configuration 2.2.0
 nuget Microsoft.Extensions.Configuration.FileExtensions 2.2.0
 nuget Microsoft.Extensions.Configuration.Json 2.2.0
 
+// For more healtchecks, look at https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+nuget AspNetCore.HealthChecks.SqlServer 2.2.0
+
 nuget Autofac 4.9.2
 nuget Autofac.Extensions.DependencyInjection 4.4.0
 
@@ -42,7 +45,7 @@ nuget Be.Vlaanderen.Basisregisters.AggregateSource.Testing ~> 3.0
 nuget Be.Vlaanderen.Basisregisters.AggregateSource.Testing.SqlStreamStore.Autofac ~> 3.0
 nuget Be.Vlaanderen.Basisregisters.AggregateSource.Testing.Xunit ~> 3.0
 
-nuget Be.Vlaanderen.Basisregisters.Api ~> 2.1
+nuget Be.Vlaanderen.Basisregisters.Api ~> 2.3
 
 nuget Be.Vlaanderen.Basisregisters.CommandHandling ~> 3.0
 nuget Be.Vlaanderen.Basisregisters.CommandHandling.SqlStreamStore ~> 3.0

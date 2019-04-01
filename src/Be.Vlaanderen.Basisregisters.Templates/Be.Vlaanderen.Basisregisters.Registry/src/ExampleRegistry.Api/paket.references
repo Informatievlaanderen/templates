@@ -4,5 +4,7 @@ Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac
 
 Be.Vlaanderen.Basisregisters.EventHandling.Autofac
 
+AspNetCore.HealthChecks.SqlServer
+
 SourceLink.Embed.AllSourceFiles
 SourceLink.Copy.PdbFiles

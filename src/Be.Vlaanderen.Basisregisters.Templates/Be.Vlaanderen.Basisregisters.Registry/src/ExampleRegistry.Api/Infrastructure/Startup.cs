@@ -17,14 +17,18 @@ namespace ExampleRegistry.Api.Infrastructure
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Diagnostics.HealthChecks;
     using Microsoft.Extensions.Logging;
     using Modules;
+    using Projections.Api;
     using SqlStreamStore;
     using Swashbuckle.AspNetCore.Swagger;
 
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
     {
+        private const string DatabaseTag = "db";
+
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
@@ -82,7 +86,24 @@ namespace ExampleRegistry.Api.Infrastructure
                     },
                     MiddlewareHooks =
                     {
-                        FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>()
+                        FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>(),
+
+                        AfterHealthChecks = health =>
+                        {
+                            var connectionStrings = _configuration
+                                .GetSection("ConnectionStrings")
+                                .GetChildren();
+
+                            foreach (var connectionString in connectionStrings)
+                                health.AddSqlServer(
+                                    connectionString.Value,
+                                    name: $"sqlserver-{connectionString.Key.ToLowerInvariant()}",
+                                    tags: new[] { DatabaseTag, "sql", "sqlserver" });
+
+                            health.AddDbContextCheck<ApiProjectionsContext>(
+                                $"dbcontext-{nameof(ApiProjectionsContext).ToLowerInvariant()}",
+                                tags: new[] { DatabaseTag, "sql", "sqlserver" });
+                        }
                     }
                 });
 
@@ -102,8 +123,10 @@ namespace ExampleRegistry.Api.Infrastructure
             IApiVersionDescriptionProvider apiVersionProvider,
             ApiDataDogToggle datadogToggle,
             ApiDebugDataDogToggle debugDataDogToggle,
-            MsSqlStreamStore streamStore)
+            MsSqlStreamStore streamStore,
+            HealthCheckService healthCheckService)
         {
+            StartupHelpers.CheckDatabases(healthCheckService, DatabaseTag).GetAwaiter().GetResult();
             StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
 
             if (datadogToggle.FeatureEnabled)
@@ -143,7 +166,7 @@ namespace ExampleRegistry.Api.Infrastructure
                 },
                 MiddlewareHooks =
                 {
-                    AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>(),
+                    AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>()
                 }
             });
         }

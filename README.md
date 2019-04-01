@@ -10,7 +10,7 @@ Install [Be.Vlaanderen.Basisregisters.Templates](https://www.nuget.org/packages/
 
 ```console
 $ dotnet new -i Be.Vlaanderen.Basisregisters.Templates
-> Installing Be.Vlaanderen.Basisregisters.Templates 1.2.1.
+> Installing Be.Vlaanderen.Basisregisters.Templates 1.3.0.
 
 $ dotnet new be-registry -h
 > Basisregisters Vlaanderen Registry (C#)
