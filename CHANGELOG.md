@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/informatievlaanderen/templates/compare/v1.3.0...v1.3.1) (2019-04-01)
+
+
+### Bug Fixes
+
+* correct password for api dev pfx ([9f1e1d7](https://github.com/informatievlaanderen/templates/commit/9f1e1d7))
+
 # [1.3.0](https://github.com/informatievlaanderen/templates/compare/v1.2.1...v1.3.0) (2019-04-01)
 
 
