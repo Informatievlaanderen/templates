@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/informatievlaanderen/templates/compare/v1.2.1...v1.3.0) (2019-04-01)
+
+
+### Features
+
+* add health checks ([7c02c04](https://github.com/informatievlaanderen/templates/commit/7c02c04))
+
 ## [1.2.1](https://github.com/informatievlaanderen/templates/compare/v1.2.0...v1.2.1) (2019-03-30)
 
 
