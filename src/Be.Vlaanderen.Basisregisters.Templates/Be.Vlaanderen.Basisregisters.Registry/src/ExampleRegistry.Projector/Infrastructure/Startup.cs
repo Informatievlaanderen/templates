@@ -12,6 +12,7 @@ namespace ExampleRegistry.Projector.Infrastructure
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
     using Be.Vlaanderen.Basisregisters.Projector.ConnectedProjections;
     using Configuration;
+    using ExampleRegistry.Projections.Api;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -26,6 +27,10 @@ namespace ExampleRegistry.Projector.Infrastructure
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
     {
+        private const string DatabaseTag = "db";
+        private const string DefaultCulture = "en-GB";
+        private const string SupportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
+
         private IContainer _applicationContainer;
 
         private readonly IConfiguration _configuration;
@@ -43,15 +48,12 @@ namespace ExampleRegistry.Projector.Infrastructure
         /// <param aggregateName="services">The collection of services to configure the application with.</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            const string defaultCulture = "en-GB";
-            const string supportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
-
             services
                 .ConfigureDefaultForApi<Startup, SharedResources>(new StartupConfigureOptions
                 {
                     Cors =
                     {
-                        Headers = _configuration
+                        Origins = _configuration
                             .GetSection("Cors")
                             .GetChildren()
                             .Select(c => c.Value)
@@ -75,15 +77,32 @@ namespace ExampleRegistry.Projector.Infrastructure
                     },
                     Localization =
                     {
-                        DefaultCulture = new CultureInfo(defaultCulture),
-                        SupportedCultures = supportedCultures
+                        DefaultCulture = new CultureInfo(DefaultCulture),
+                        SupportedCultures = SupportedCultures
                             .Split(';', StringSplitOptions.RemoveEmptyEntries)
                             .Select(x => new CultureInfo(x))
                             .ToArray()
                     },
                     MiddlewareHooks =
                     {
-                        FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>()
+                        FluentValidation = fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>(),
+
+                        AfterHealthChecks = health =>
+                        {
+                            var connectionStrings = _configuration
+                                .GetSection("ConnectionStrings")
+                                .GetChildren();
+
+                            foreach (var connectionString in connectionStrings)
+                                health.AddSqlServer(
+                                    connectionString.Value,
+                                    name: $"sqlserver-{connectionString.Key.ToLowerInvariant()}",
+                                    tags: new[] { DatabaseTag, "sql", "sqlserver" });
+
+                            health.AddDbContextCheck<ApiProjectionsContext>(
+                                $"dbcontext-{nameof(ApiProjectionsContext).ToLowerInvariant()}",
+                                tags: new[] { DatabaseTag, "sql", "sqlserver" });
+                        }
                     }
                 });
 
