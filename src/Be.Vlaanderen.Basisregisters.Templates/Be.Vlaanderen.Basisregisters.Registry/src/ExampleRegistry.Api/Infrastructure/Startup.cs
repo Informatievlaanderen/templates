@@ -28,6 +28,8 @@ namespace ExampleRegistry.Api.Infrastructure
     public class Startup
     {
         private const string DatabaseTag = "db";
+        private const string DefaultCulture = "en-GB";
+        private const string SupportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
 
         private IContainer _applicationContainer;
 
@@ -46,15 +48,12 @@ namespace ExampleRegistry.Api.Infrastructure
         /// <param aggregateName="services">The collection of services to configure the application with.</param>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            const string defaultCulture = "en-GB";
-            const string supportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
-
             services
                 .ConfigureDefaultForApi<Startup, SharedResources>(new StartupConfigureOptions
                 {
                     Cors =
                     {
-                        Headers = _configuration
+                        Origins = _configuration
                             .GetSection("Cors")
                             .GetChildren()
                             .Select(c => c.Value)
@@ -78,10 +77,10 @@ namespace ExampleRegistry.Api.Infrastructure
                     },
                     Localization =
                     {
-                        DefaultCulture = new CultureInfo(defaultCulture),
-                        SupportedCultures = supportedCultures
+                        DefaultCulture = new CultureInfo(DefaultCulture),
+                        SupportedCultures = SupportedCultures
                             .Split(';', StringSplitOptions.RemoveEmptyEntries)
-                            .Select(x => new CultureInfo(x))
+                            .Select(x => new CultureInfo(x.Trim()))
                             .ToArray()
                     },
                     MiddlewareHooks =

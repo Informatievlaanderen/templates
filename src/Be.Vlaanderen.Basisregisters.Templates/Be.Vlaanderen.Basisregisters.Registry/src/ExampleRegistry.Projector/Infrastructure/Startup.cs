@@ -80,7 +80,7 @@ namespace ExampleRegistry.Projector.Infrastructure
                         DefaultCulture = new CultureInfo(DefaultCulture),
                         SupportedCultures = SupportedCultures
                             .Split(';', StringSplitOptions.RemoveEmptyEntries)
-                            .Select(x => new CultureInfo(x))
+                            .Select(x => new CultureInfo(x.Trim()))
                             .ToArray()
                     },
                     MiddlewareHooks =
