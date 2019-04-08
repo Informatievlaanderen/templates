@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/informatievlaanderen/templates/compare/v1.3.1...v1.3.2) (2019-04-08)
+
+
+### Bug Fixes
+
+* put cors origins into origins instead of headers ([d4744f1](https://github.com/informatievlaanderen/templates/commit/d4744f1))
+
 ## [1.3.1](https://github.com/informatievlaanderen/templates/compare/v1.3.0...v1.3.1) (2019-04-01)
 
 
