@@ -10,12 +10,19 @@ Install [Be.Vlaanderen.Basisregisters.Templates](https://www.nuget.org/packages/
 
 ```console
 $ dotnet new -i Be.Vlaanderen.Basisregisters.Templates
-> Installing Be.Vlaanderen.Basisregisters.Templates 1.3.1.
+> Installing Be.Vlaanderen.Basisregisters.Templates 1.3.2.
 
 $ dotnet new be-registry -h
 > Basisregisters Vlaanderen Registry (C#)
 > Author: Basisregisters Vlaanderen
 > Description: A professional .NET Core project setup including build scripts, documentation and unit tests for an event-sourced project.
+```
+
+In case you want to verify if the correct version is installed, you can run:
+
+```console
+$ ls ~/.templateengine/dotnetcli/v*/packages/be.vlaanderen.basisregisters.templates.*.nupkg
+> /home/cumpsd/.templateengine/dotnetcli/v2.2.203/packages/be.vlaanderen.basisregisters.templates.1.3.2.nupkg
 ```
 
 To create a new registry, in this case a registry containing public services, run:
