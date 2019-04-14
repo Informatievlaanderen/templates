@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/informatievlaanderen/templates/compare/v1.4.0...v1.4.1) (2019-04-14)
+
+
+### Bug Fixes
+
+* clean up packages.json ([27a1ec1](https://github.com/informatievlaanderen/templates/commit/27a1ec1))
+* deal with underscore case ([f67e274](https://github.com/informatievlaanderen/templates/commit/f67e274))
+* get rid of concrete address of aiv in example ssl ([05470a6](https://github.com/informatievlaanderen/templates/commit/05470a6))
+
 # [1.4.0](https://github.com/informatievlaanderen/templates/compare/v1.3.2...v1.4.0) (2019-04-14)
 
 
