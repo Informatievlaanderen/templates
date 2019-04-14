@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/informatievlaanderen/templates/compare/v1.4.1...v1.4.2) (2019-04-14)
+
+
+### Bug Fixes
+
+* also check databases for projector ([ae593ab](https://github.com/informatievlaanderen/templates/commit/ae593ab))
+
 ## [1.4.1](https://github.com/informatievlaanderen/templates/compare/v1.4.0...v1.4.1) (2019-04-14)
 
 
