@@ -9,21 +9,23 @@ namespace ExampleRegistry.Projections.Api.Tests
     using Infrastructure;
     using Xunit;
     using Xunit.Abstractions;
+    using ExampleRegistry.Tests.Infrastructure;
 
     public class ExampleAggregateDetailTests : ProjectionsTest
     {
-        private readonly Fixture _fixture;
+        public Fixture Fixture { get; }
 
         public ExampleAggregateDetailTests(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            _fixture = new Fixture();
+            Fixture = new Fixture();
+            Fixture.CustomizeExampleAggregateName();
         }
 
         [Fact]
         public Task when_example_aggregates_are_born()
         {
-            var data = _fixture
+            var data = Fixture
                 .CreateMany<ExampleAggregateWasBorn>(new Random().Next(1, 100))
                 .Select(@event =>
                 {
@@ -48,7 +50,7 @@ namespace ExampleRegistry.Projections.Api.Tests
         [Fact]
         public Task when_example_aggregates_are_named()
         {
-            var previousEvents = _fixture
+            var previousEvents = Fixture
                 .CreateMany<ExampleAggregateWasBorn>(new Random().Next(1, 100))
                 .ToList();
 
@@ -56,7 +58,7 @@ namespace ExampleRegistry.Projections.Api.Tests
                 .Select(x =>
                     new ExampleAggregateWasNamed(
                         new ExampleAggregateId(x.ExampleAggregateId),
-                        _fixture.Create<ExampleAggregateName>()))
+                        Fixture.Create<ExampleAggregateName>()))
                 .ToList();
 
             var expected = events

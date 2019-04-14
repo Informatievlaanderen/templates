@@ -2,7 +2,7 @@ namespace ExampleRegistry.Tests.Infrastructure
 {
     using AutoFixture;
 
-    internal static partial class Customizations
+    public static partial class Customizations
     {
         public static void CustomizeExampleAggregateName(this IFixture fixture) =>
             fixture.Customize<ExampleAggregateName>(composer =>

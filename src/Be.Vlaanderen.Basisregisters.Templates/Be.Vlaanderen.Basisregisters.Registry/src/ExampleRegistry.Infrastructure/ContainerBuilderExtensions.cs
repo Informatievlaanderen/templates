@@ -1,9 +1,10 @@
 namespace ExampleRegistry.Infrastructure
 {
     using System;
-    using Be.Vlaanderen.Basisregisters.AggregateSource.SqlStreamStore.Autofac;
     using Autofac;
     using Autofac.Core.Registration;
+    using Be.Vlaanderen.Basisregisters.AggregateSource.SqlStreamStore.Autofac;
+    using Be.Vlaanderen.Basisregisters.DataDog.Tracing.SqlStreamStore;
     using Microsoft.Extensions.Configuration;
 
     public static class ContainerBuilderExtensions
@@ -18,7 +19,8 @@ namespace ExampleRegistry.Infrastructure
                 throw new ApplicationException("Missing 'Events' connectionstring.");
 
             builder
-                .RegisterModule(new SqlStreamStoreModule(connectionString, Schema.Default));
+                .RegisterModule(new SqlStreamStoreModule(connectionString, Schema.Default))
+                .RegisterModule(new TraceSqlStreamStoreModule(configuration["DataDog:ServiceName"]));
 
             return builder;
         }
@@ -33,7 +35,8 @@ namespace ExampleRegistry.Infrastructure
                 throw new ApplicationException("Missing 'Events' connectionstring.");
 
             return builder
-                .RegisterModule(new SqlStreamStoreModule(connectionString, Schema.Default));
+                .RegisterModule(new SqlStreamStoreModule(connectionString, Schema.Default))
+                .RegisterModule(new TraceSqlStreamStoreModule(configuration["DataDog:ServiceName"]));
         }
     }
 }

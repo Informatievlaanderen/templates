@@ -6,9 +6,7 @@ namespace ExampleRegistry.Projections.Api.Tests.Infrastructure
     {
         protected ITestOutputHelper TestOutputHelper { get; private set; }
 
-        public ProjectionsTest(ITestOutputHelper testOutputHelper)
-        {
-            TestOutputHelper = testOutputHelper;
-        }
+        public ProjectionsTest(ITestOutputHelper testOutputHelper) => TestOutputHelper = testOutputHelper;
+
     }
 }
