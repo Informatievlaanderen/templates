@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/informatievlaanderen/templates/compare/v1.3.2...v1.4.0) (2019-04-14)
+
+
+### Features
+
+* containerize projector ([d9be74d](https://github.com/informatievlaanderen/templates/commit/d9be74d))
+* upgrade to .net core 2.2.4 ([182a48c](https://github.com/informatievlaanderen/templates/commit/182a48c))
+
 ## [1.3.2](https://github.com/informatievlaanderen/templates/compare/v1.3.1...v1.3.2) (2019-04-08)
 
 
