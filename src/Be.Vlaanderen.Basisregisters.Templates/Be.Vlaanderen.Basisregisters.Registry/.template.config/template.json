@@ -306,6 +306,44 @@
         ]
       }
     },
+    "MainAggregateUnderscoreCase": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "example_aggregate",
+      "parameters": {
+        "source": "MainAggregateCamelCase",
+        "action": "replace",
+        "steps": [
+          { "regex": "A", "replacement": "_a" },
+          { "regex": "B", "replacement": "_b" },
+          { "regex": "C", "replacement": "_c" },
+          { "regex": "D", "replacement": "_d" },
+          { "regex": "E", "replacement": "_e" },
+          { "regex": "F", "replacement": "_f" },
+          { "regex": "G", "replacement": "_g" },
+          { "regex": "H", "replacement": "_h" },
+          { "regex": "I", "replacement": "_i" },
+          { "regex": "J", "replacement": "_j" },
+          { "regex": "K", "replacement": "_k" },
+          { "regex": "L", "replacement": "_l" },
+          { "regex": "M", "replacement": "_m" },
+          { "regex": "N", "replacement": "_n" },
+          { "regex": "O", "replacement": "_o" },
+          { "regex": "P", "replacement": "_p" },
+          { "regex": "Q", "replacement": "_q" },
+          { "regex": "R", "replacement": "_r" },
+          { "regex": "S", "replacement": "_s" },
+          { "regex": "T", "replacement": "_t" },
+          { "regex": "U", "replacement": "_u" },
+          { "regex": "V", "replacement": "_v" },
+          { "regex": "W", "replacement": "_w" },
+          { "regex": "X", "replacement": "_x" },
+          { "regex": "Y", "replacement": "_y" },
+          { "regex": "Z", "replacement": "_z" }
+        ]
+      }
+    },
     "MainAggregateSpaced": {
       "type": "generated",
       "generator": "regex",
