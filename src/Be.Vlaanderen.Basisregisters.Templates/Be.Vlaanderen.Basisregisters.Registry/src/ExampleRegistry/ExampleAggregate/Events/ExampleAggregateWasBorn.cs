@@ -20,6 +20,6 @@ namespace ExampleRegistry.ExampleAggregate.Events
         private ExampleAggregateWasBorn(
             Guid exampleAggregateId)
             : this(
-                new ExampleAggregateId(exampleAggregateId)) {}
+                new ExampleAggregateId(exampleAggregateId)) { }
     }
 }

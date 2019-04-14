@@ -8,7 +8,9 @@ namespace ExampleRegistry.Infrastructure
 
     public static class ContainerBuilderExtensions
     {
-        public static ContainerBuilder RegisterEventstreamModule(this ContainerBuilder builder, IConfiguration configuration)
+        public static ContainerBuilder RegisterEventstreamModule(
+            this ContainerBuilder builder,
+            IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("Events");
 
@@ -21,7 +23,9 @@ namespace ExampleRegistry.Infrastructure
             return builder;
         }
 
-        public static IModuleRegistrar RegisterEventstreamModule(this IModuleRegistrar builder, IConfiguration configuration)
+        public static IModuleRegistrar RegisterEventstreamModule(
+            this IModuleRegistrar builder,
+            IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("Events");
 

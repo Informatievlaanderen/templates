@@ -6,7 +6,9 @@ namespace ExampleRegistry.Projector.Projections
     using Microsoft.AspNetCore.Mvc;
 
     [ApiVersion("1.0")]
+    [AdvertiseApiVersions("1.0")]
     [ApiRoute("projections")]
+    [ApiExplorerSettings(GroupName = "Projections")]
     public class ProjectionsController : DefaultProjectorController
     {
         public ProjectionsController(IConnectedProjectionsManager connectedProjectionsManager)

@@ -38,7 +38,8 @@ namespace ExampleRegistry.Api.Infrastructure.Modules
                 .RegisterModule(new CommandHandlingModule(_configuration))
                 .RegisterModule(new ApiProjectionsModule(_configuration, _services, _loggerFactory));
 
-            containerBuilder.Populate(_services);
+            containerBuilder
+                .Populate(_services);
         }
     }
 }

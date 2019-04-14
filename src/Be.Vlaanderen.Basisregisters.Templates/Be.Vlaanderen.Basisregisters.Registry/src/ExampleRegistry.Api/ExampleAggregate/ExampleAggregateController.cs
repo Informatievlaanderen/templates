@@ -13,7 +13,6 @@ namespace ExampleRegistry.Api.ExampleAggregate
     using Be.Vlaanderen.Basisregisters.CommandHandling;
     using Infrastructure;
     using Infrastructure.Responses;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -164,13 +163,11 @@ namespace ExampleRegistry.Api.ExampleAggregate
         [ProducesResponseType(typeof(ExampleAggregateDetailResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BasicApiValidationProblem), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status412PreconditionFailed)]
         [ProducesResponseType(typeof(BasicApiProblem), StatusCodes.Status500InternalServerError)]
         [SwaggerResponseExample(StatusCodes.Status200OK, typeof(ExampleAggregateDetailResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status400BadRequest, typeof(ValidationErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(ExampleAggregateNotFoundResponseExamples), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(StatusCodes.Status500InternalServerError, typeof(InternalServerErrorResponseExamples), jsonConverter: typeof(StringEnumConverter))]
-        [AllowAnonymous]
         public async Task<IActionResult> DetailExampleAggregate(
             [FromServices] ApiProjectionsContext context,
             [FromRoute] Guid exampleAggregateId,

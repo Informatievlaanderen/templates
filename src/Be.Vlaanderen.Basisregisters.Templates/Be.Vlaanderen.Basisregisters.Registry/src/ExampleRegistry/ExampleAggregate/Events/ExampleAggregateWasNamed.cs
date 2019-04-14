@@ -31,6 +31,6 @@ namespace ExampleRegistry.ExampleAggregate.Events
             Language language)
             : this(
                 new ExampleAggregateId(exampleAggregateId),
-                new ExampleAggregateName(name, language)) {}
+                new ExampleAggregateName(name, language)) { }
     }
 }
