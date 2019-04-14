@@ -18,6 +18,7 @@ namespace ExampleRegistry.Projector.Infrastructure
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Diagnostics.HealthChecks;
     using Microsoft.Extensions.Logging;
     using Modules;
     using SqlStreamStore;
@@ -122,8 +123,10 @@ namespace ExampleRegistry.Projector.Infrastructure
             IApiVersionDescriptionProvider apiVersionProvider,
             ApiDataDogToggle datadogToggle,
             ApiDebugDataDogToggle debugDataDogToggle,
-            MsSqlStreamStore streamStore)
+            MsSqlStreamStore streamStore,
+            HealthCheckService healthCheckService)
         {
+            StartupHelpers.CheckDatabases(healthCheckService, DatabaseTag).GetAwaiter().GetResult();
             StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
 
             if (datadogToggle.FeatureEnabled)
