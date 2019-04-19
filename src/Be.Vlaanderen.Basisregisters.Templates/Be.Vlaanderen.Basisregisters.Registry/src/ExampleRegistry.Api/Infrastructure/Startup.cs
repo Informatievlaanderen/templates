@@ -27,8 +27,6 @@ namespace ExampleRegistry.Api.Infrastructure
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
     {
-        private readonly static Random TraceIdGenerator = new Random();
-
         private const string DatabaseTag = "db";
         private const string DefaultCulture = "en-GB";
         private const string SupportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
@@ -130,67 +128,43 @@ namespace ExampleRegistry.Api.Infrastructure
             StartupHelpers.CheckDatabases(healthCheckService, DatabaseTag).GetAwaiter().GetResult();
             StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
 
-            if (datadogToggle.FeatureEnabled)
-            {
-                if (debugDataDogToggle.FeatureEnabled)
-                    StartupHelpers.SetupSourceListener(serviceProvider.GetRequiredService<TraceSource>());
+            app
+                .UseDatadog<Startup>(
+                    serviceProvider,
+                    loggerFactory,
+                    datadogToggle,
+                    debugDataDogToggle,
+                    _configuration["DataDog:ServiceName"])
 
-                var traceSourceFactory = serviceProvider.GetRequiredService<Func<long, TraceSource>>();
-                var logger = loggerFactory.CreateLogger<Startup>();
-
-                app.UseDataDogTracing(
-                    request =>
+                .UseDefaultForApi(new StartupUseOptions
+                {
+                    Common =
                     {
-                        long traceId = TraceIdGenerator.Next(1, int.MaxValue);
-                        try
-                        {
-                            logger.LogDebug("Trying to parse traceid from {Headers}", request.Headers);
-
-                            if (request.Headers.TryGetValue("X-Trace-Id", out var traceHeader) && long.TryParse(traceHeader.ToString(), out var possibleTraceId))
-                                traceId = possibleTraceId;
-
-                            logger.LogDebug("Parsed {ParsedTraceId}", traceId);
-                        }
-                        catch (Exception e)
-                        {
-                            logger.LogError(e, "Failed to parse Trace Id from {Headers}.", request.Headers);
-                        }
-
-                        return traceSourceFactory(traceId);
+                        ApplicationContainer = _applicationContainer,
+                        ServiceProvider = serviceProvider,
+                        HostingEnvironment = env,
+                        ApplicationLifetime = appLifetime,
+                        LoggerFactory = loggerFactory,
                     },
-                    _configuration["DataDog:ServiceName"],
-                    pathToCheck => pathToCheck != "/");
-            }
-
-            app.UseDefaultForApi(new StartupUseOptions
-            {
-                Common =
-                {
-                    ApplicationContainer = _applicationContainer,
-                    ServiceProvider = serviceProvider,
-                    HostingEnvironment = env,
-                    ApplicationLifetime = appLifetime,
-                    LoggerFactory = loggerFactory,
-                },
-                Api =
-                {
-                    VersionProvider = apiVersionProvider,
-                    Info = groupName => $"Example Registry API {groupName}",
-                    CustomExceptionHandlers = new IExceptionHandler[]
+                    Api =
                     {
-                        new ValidationExceptionHandling(),
+                        VersionProvider = apiVersionProvider,
+                        Info = groupName => $"Example Registry API {groupName}",
+                        CustomExceptionHandlers = new IExceptionHandler[]
+                        {
+                            new ValidationExceptionHandling(),
+                        }
+                    },
+                    Server =
+                    {
+                        PoweredByName = "Vlaamse overheid - Basisregisters Vlaanderen",
+                        ServerName = "agentschap Informatie Vlaanderen"
+                    },
+                    MiddlewareHooks =
+                    {
+                        AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>()
                     }
-                },
-                Server =
-                {
-                    PoweredByName = "Vlaamse overheid - Basisregisters Vlaanderen",
-                    ServerName = "agentschap Informatie Vlaanderen"
-                },
-                MiddlewareHooks =
-                {
-                    AfterMiddleware = x => x.UseMiddleware<AddNoCacheHeadersMiddleware>()
-                }
-            });
+                });
         }
 
         private static string GetApiLeadingText(ApiVersionDescription description)
