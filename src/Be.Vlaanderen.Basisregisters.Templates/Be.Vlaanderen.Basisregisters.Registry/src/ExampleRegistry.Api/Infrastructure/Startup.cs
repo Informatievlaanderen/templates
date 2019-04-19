@@ -133,8 +133,29 @@ namespace ExampleRegistry.Api.Infrastructure
                 if (debugDataDogToggle.FeatureEnabled)
                     StartupHelpers.SetupSourceListener(serviceProvider.GetRequiredService<TraceSource>());
 
+                var traceSourceFactory = serviceProvider.GetRequiredService<Func<long, TraceSource>>();
+                var logger = loggerFactory.CreateLogger<Startup>();
+
                 app.UseDataDogTracing(
-                    serviceProvider.GetRequiredService<TraceSource>(),
+                    request =>
+                    {
+                        var traceId = 42L;
+                        try
+                        {
+                            logger.LogDebug("Trying to parse traceid from {Headers}", request.Headers);
+
+                            if (request.Headers.TryGetValue("X-Trace-Id", out var stringValues) && long.TryParse(stringValues.ToString(), out var possibleTraceId))
+                                traceId = possibleTraceId;
+
+                            logger.LogDebug("Parsed {ParsedTraceId}", traceId);
+                        }
+                        catch (Exception e)
+                        {
+                            logger.LogError(e, "Failed to parse Trace Id from {Headers}.", request.Headers);
+                        }
+
+                        return traceSourceFactory(traceId);
+                    },
                     _configuration["DataDog:ServiceName"],
                     pathToCheck => pathToCheck != "/");
             }

@@ -6,20 +6,33 @@ namespace ExampleRegistry.Projector.Infrastructure
 
     public class Program
     {
-        private static class DevelopmentCertificate
-        {
-            internal const string Name = "localhost.pfx";
-            internal const string Key = "dev-pfx-password";
-        }
+        private static readonly DevelopmentCertificate DevelopmentCertificate =
+            new DevelopmentCertificate(
+                "localhost.pfx",
+                "dev-pfx-password");
 
         public static void Main(string[] args) => CreateWebHostBuilder(args).Build().Run();
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
             => new WebHostBuilder()
                 .UseDefaultForApi<Startup>(
-                    httpPort: 8100,
-                    httpsPort: 9100,
-                    httpsCertificate: () => new X509Certificate2(DevelopmentCertificate.Name, DevelopmentCertificate.Key),
-                    commandLineArgs: args);
+                    new ProgramOptions
+                    {
+                        Hosting =
+                        {
+                            HttpPort = 8100,
+                            HttpsPort = 9100,
+                            HttpsCertificate = DevelopmentCertificate.ToCertificate,
+                        },
+                        Logging =
+                        {
+                            WriteTextToConsole = true,
+                            WriteJsonToConsole = false
+                        },
+                        Runtime =
+                        {
+                            CommandLineArgs = args
+                        }
+                    });
     }
 }

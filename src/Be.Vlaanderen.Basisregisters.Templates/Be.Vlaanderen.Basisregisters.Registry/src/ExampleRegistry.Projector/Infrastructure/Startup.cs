@@ -5,6 +5,7 @@ namespace ExampleRegistry.Projector.Infrastructure
     using System.Linq;
     using System.Reflection;
     using Be.Vlaanderen.Basisregisters.Api;
+    using Be.Vlaanderen.Basisregisters.DataDog.Tracing;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.AspNetCore;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac;
     using Autofac;
@@ -23,7 +24,6 @@ namespace ExampleRegistry.Projector.Infrastructure
     using Modules;
     using SqlStreamStore;
     using Swashbuckle.AspNetCore.Swagger;
-    using TraceSource = Be.Vlaanderen.Basisregisters.DataDog.Tracing.TraceSource;
 
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
@@ -134,8 +134,29 @@ namespace ExampleRegistry.Projector.Infrastructure
                 if (debugDataDogToggle.FeatureEnabled)
                     StartupHelpers.SetupSourceListener(serviceProvider.GetRequiredService<TraceSource>());
 
+                var traceSourceFactory = serviceProvider.GetRequiredService<Func<long, TraceSource>>();
+                var logger = loggerFactory.CreateLogger<Startup>();
+
                 app.UseDataDogTracing(
-                    serviceProvider.GetRequiredService<TraceSource>(),
+                    request =>
+                    {
+                        var traceId = 42L;
+                        try
+                        {
+                            logger.LogDebug("Trying to parse traceid from {Headers}", request.Headers);
+
+                            if (request.Headers.TryGetValue("X-Trace-Id", out var stringValues) && long.TryParse(stringValues.ToString(), out var possibleTraceId))
+                                traceId = possibleTraceId;
+
+                            logger.LogDebug("Parsed {ParsedTraceId}", traceId);
+                        }
+                        catch (Exception e)
+                        {
+                            logger.LogError(e, "Failed to parse Trace Id from {Headers}.", request.Headers);
+                        }
+
+                        return traceSourceFactory(traceId);
+                    },
                     _configuration["DataDog:ServiceName"],
                     pathToCheck => pathToCheck != "/");
             }
