@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/informatievlaanderen/templates/compare/v1.5.0...v1.6.0) (2019-04-19)
+
+
+### Features
+
+* add brotli compression ([e8d9078](https://github.com/informatievlaanderen/templates/commit/e8d9078))
+
 # [1.5.0](https://github.com/informatievlaanderen/templates/compare/v1.4.2...v1.5.0) (2019-04-19)
 
 
