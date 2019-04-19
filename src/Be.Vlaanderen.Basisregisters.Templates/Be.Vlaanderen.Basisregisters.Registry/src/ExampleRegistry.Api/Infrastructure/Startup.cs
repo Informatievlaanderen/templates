@@ -27,6 +27,8 @@ namespace ExampleRegistry.Api.Infrastructure
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
     {
+        private readonly static Random TraceIdGenerator = new Random();
+
         private const string DatabaseTag = "db";
         private const string DefaultCulture = "en-GB";
         private const string SupportedCultures = "en-GB;en-US;en;nl-BE;nl;fr-BE;fr";
@@ -139,12 +141,12 @@ namespace ExampleRegistry.Api.Infrastructure
                 app.UseDataDogTracing(
                     request =>
                     {
-                        var traceId = 42L;
+                        long traceId = TraceIdGenerator.Next(1, int.MaxValue);
                         try
                         {
                             logger.LogDebug("Trying to parse traceid from {Headers}", request.Headers);
 
-                            if (request.Headers.TryGetValue("X-Trace-Id", out var stringValues) && long.TryParse(stringValues.ToString(), out var possibleTraceId))
+                            if (request.Headers.TryGetValue("X-Trace-Id", out var traceHeader) && long.TryParse(traceHeader.ToString(), out var possibleTraceId))
                                 traceId = possibleTraceId;
 
                             logger.LogDebug("Parsed {ParsedTraceId}", traceId);
