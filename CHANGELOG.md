@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/informatievlaanderen/templates/compare/v1.4.2...v1.5.0) (2019-04-19)
+
+
+### Features
+
+* add updated datadog support ([14ec760](https://github.com/informatievlaanderen/templates/commit/14ec760))
+* generate sane default trace id ([b8fabfd](https://github.com/informatievlaanderen/templates/commit/b8fabfd))
+
 ## [1.4.2](https://github.com/informatievlaanderen/templates/compare/v1.4.1...v1.4.2) (2019-04-14)
 
 
