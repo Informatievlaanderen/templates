@@ -2,6 +2,6 @@ framework: netstandard20, netcoreapp22, net472
 
 source https://api.nuget.org/v3/index.json
 
-nuget Be.Vlaanderen.Basisregisters.Build.Pipeline ~> 1.5
+nuget Be.Vlaanderen.Basisregisters.Build.Pipeline ~> 1.6
 
 nuget FAKE 4.64.13 // Don't update to v5!

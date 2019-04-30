@@ -105,10 +105,6 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
                 {
                     VersionProvider = apiVersionProvider,
                     Info = groupName => $"Example Registry API {groupName}",
-                    CustomExceptionHandlers = new IExceptionHandler[]
-                    {
-                        new ValidationExceptionHandling()
-                    }
                 },
                 Server =
                 {

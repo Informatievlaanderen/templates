@@ -60,13 +60,10 @@ namespace ExampleRegistry.Api.Infrastructure
                 CorrelationId = StringOrEmpty(source, Keys.CorrelationId)
             };
 
-        private static IEnumerable<KeyValuePair<string, string>> UserClaimsOrNull(IDictionary<string, object> source, string key)
-        {
-            if (source.ContainsKey(key))
-                return (IEnumerable<KeyValuePair<string, string>>)source[key];
-
-            return null;
-        }
+        private static IEnumerable<KeyValuePair<string, string>> UserClaimsOrNull(IDictionary<string, object> source, string key) =>
+            source.ContainsKey(key)
+                ? (IEnumerable<KeyValuePair<string, string>>) source[key]
+                : null;
 
         private static string StringOrEmpty(IDictionary<string, object> source, string key) =>
             source.ContainsKey(key)

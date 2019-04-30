@@ -8,8 +8,6 @@ namespace ExampleRegistry.Api.Infrastructure
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
     using Be.Vlaanderen.Basisregisters.Api.Exceptions;
-    using Be.Vlaanderen.Basisregisters.DataDog.Tracing;
-    using Be.Vlaanderen.Basisregisters.DataDog.Tracing.AspNetCore;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac;
     using Configuration;
     using Microsoft.AspNetCore.Builder;
@@ -150,10 +148,12 @@ namespace ExampleRegistry.Api.Infrastructure
                     {
                         VersionProvider = apiVersionProvider,
                         Info = groupName => $"Example Registry API {groupName}",
+#if (!ExcludeExampleAggregate)
                         CustomExceptionHandlers = new IExceptionHandler[]
                         {
-                            new ValidationExceptionHandling(),
+                            new ExampleRegistryExceptionHandler(),
                         }
+#endif
                     },
                     Server =
                     {

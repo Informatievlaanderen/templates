@@ -1,6 +1,5 @@
 namespace ExampleRegistry.Projector.Infrastructure
 {
-    using System.Security.Cryptography.X509Certificates;
     using Be.Vlaanderen.Basisregisters.Api;
     using Microsoft.AspNetCore.Hosting;
 

@@ -12,12 +12,14 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
 
         public ReturnHandler<CommandMessage<TCommand>> Resolve<TCommand>() where TCommand : class
         {
+            #pragma warning disable 1998
             ReturnHandler<CommandMessage<TCommand>> handler = async (msg, ct) =>
             {
                 ReceivedCommands.Add(msg);
 
                 return -1L;
             };
+            #pragma warning restore 1998
 
             return handler;
         }

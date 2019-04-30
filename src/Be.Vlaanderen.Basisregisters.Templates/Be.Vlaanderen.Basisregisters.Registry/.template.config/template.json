@@ -506,6 +506,7 @@
         "src/ExampleRegistry/Exceptions/**",
         "src/ExampleRegistry/ValueObjects/**",
         "src/ExampleRegistry.Api/ExampleAggregate/**",
+        "src/ExampleRegistry.Api/Infrastructure/ExampleRegistryExceptionHandler.cs",
         "src/ExampleRegistry.Infrastructure/Repositories/ExampleAggregates.cs",
         "src/ExampleRegistry.Projections/ExampleAggregateDetail/**",
         "src/ExampleRegistry.Projections/ExampleAggregateList/**",

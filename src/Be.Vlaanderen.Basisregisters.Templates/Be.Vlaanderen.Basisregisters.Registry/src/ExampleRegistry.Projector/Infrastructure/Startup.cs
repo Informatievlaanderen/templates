@@ -5,8 +5,6 @@ namespace ExampleRegistry.Projector.Infrastructure
     using System.Linq;
     using System.Reflection;
     using Be.Vlaanderen.Basisregisters.Api;
-    using Be.Vlaanderen.Basisregisters.DataDog.Tracing;
-    using Be.Vlaanderen.Basisregisters.DataDog.Tracing.AspNetCore;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Autofac;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
@@ -151,10 +149,6 @@ namespace ExampleRegistry.Projector.Infrastructure
                     {
                         VersionProvider = apiVersionProvider,
                         Info = groupName => $"Example Registry Projector API {groupName}",
-                        CustomExceptionHandlers = new IExceptionHandler[]
-                        {
-                            new ValidationExceptionHandling(),
-                        }
                     },
                     Server =
                     {
