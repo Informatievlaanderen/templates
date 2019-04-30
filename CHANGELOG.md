@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/informatievlaanderen/templates/compare/v1.6.0...v1.7.0) (2019-04-30)
+
+
+### Features
+
+* update to api v7 and netcore 2.2.4 ([5ea686e](https://github.com/informatievlaanderen/templates/commit/5ea686e))
+
 # [1.6.0](https://github.com/informatievlaanderen/templates/compare/v1.5.0...v1.6.0) (2019-04-19)
 
 
