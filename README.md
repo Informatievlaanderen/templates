@@ -86,6 +86,27 @@ To remove everything, run:
 $ dotnet new -u Be.Vlaanderen.Basisregisters.Templates
 ```
 
+## Features
+
+Our Base Registry template provides quite a bit out of the box:
+
+* FAKE build script + Semantic versioning
+* Command Handling (SQL Stream Store, Aggregate Source)
+* Event Handling (Projac, Projector)
+* Pagination, Sorting, Filtering
+* Validation (Fluent Validation, Problem Details)
+* Localization
+* API Versioning
+* Logging (Serilog)
+* Health Checks (Alive, Database)
+* CORS configuration
+* Response Compression (GZip, Brotli)
+* xUnit Tests (Domain, API, Projections)
+* Swagger/OpenAPI documentation
+* ReDoc API documentation
+* Structurizr documentation
+* Docker deployment
+
 ## License
 
 [European Union Public Licence (EUPL)](https://joinup.ec.europa.eu/news/understanding-eupl-v12)
