@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/informatievlaanderen/templates/compare/v1.7.0...v1.8.0) (2019-06-07)
+
+
+### Features
+
+* add aws ecs integration ([4be682b](https://github.com/informatievlaanderen/templates/commit/4be682b))
+
 # [1.7.0](https://github.com/informatievlaanderen/templates/compare/v1.6.0...v1.7.0) (2019-04-30)
 
 
