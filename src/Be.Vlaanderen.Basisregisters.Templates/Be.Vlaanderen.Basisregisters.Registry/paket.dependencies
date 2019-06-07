@@ -16,15 +16,8 @@ nuget Microsoft.NETCore.DotNetHostPolicy 2.2.4
 nuget NETStandard.Library 2.0.3
 
 // PRODUCTION STUFF
-nuget Microsoft.Extensions.Configuration 2.2.0
-nuget Microsoft.Extensions.Configuration.FileExtensions 2.2.0
-nuget Microsoft.Extensions.Configuration.Json 2.2.0
-
 // For more healtchecks, look at https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 nuget AspNetCore.HealthChecks.SqlServer 2.2.0
-
-nuget Autofac 4.9.2
-nuget Autofac.Extensions.DependencyInjection 4.4.0
 
 nuget Microsoft.EntityFrameworkCore.Design 2.2.4
 
@@ -50,12 +43,12 @@ nuget Be.Vlaanderen.Basisregisters.EventHandling.Autofac ~> 1.0
 
 nuget Be.Vlaanderen.Basisregisters.Projector ~> 3.1
 
-nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.LastChangedList ~> 3.2
-nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.SqlStreamStore ~> 3.2
-nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.SqlStreamStore.Autofac ~> 3.2
-nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.Runner ~> 3.2
-nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.Connector ~> 3.2
-nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.Connector.Testing ~> 3.2
+nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.LastChangedList ~> 3.5
+nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.SqlStreamStore ~> 3.5
+nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.SqlStreamStore.Autofac ~> 3.5
+nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.Runner ~> 3.5
+nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.Connector ~> 3.5
+nuget Be.Vlaanderen.Basisregisters.ProjectionHandling.Connector.Testing ~> 3.5
 
 // DOCS STUFF
 nuget Structurizr.Core 0.9.0
@@ -63,14 +56,14 @@ nuget Structurizr.Client 0.9.0
 nuget Structurizr.AdrTools 0.9.0
 
 // TEST STUFF
-nuget Microsoft.NET.Test.Sdk 16.0.1
+nuget Microsoft.NET.Test.Sdk 16.1.1
 nuget Microsoft.AspNetCore.TestHost 2.2.0
 nuget Microsoft.EntityFrameworkCore.InMemory 2.2.4
 nuget xunit 2.4.1
 nuget xunit.runner.visualstudio 2.4.1
 nuget xunit.categories 2.0.4
-nuget AutoFixture 4.8.0
-nuget AutoFixture.Xunit2 4.8.0
+nuget AutoFixture 4.9.0
+nuget AutoFixture.Xunit2 4.9.0
 
 // BUILD STUFF
 nuget FAKE 4.64.13 // Don't update to v5!

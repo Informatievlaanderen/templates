@@ -5,7 +5,11 @@ LABEL maintainer "agentschap Informatie Vlaanderen <informatie.vlaanderen@vlaand
 COPY / /app
 WORKDIR /app
 
-EXPOSE 5000/tcp
-ENV ASPNETCORE_URLS http://*:5000
+RUN apt-get update && \
+    apt-get install curl jq -y && \
+    chmod +x ./init.sh
 
-ENTRYPOINT ["./ExampleRegistry.Api.Projector"]
+EXPOSE 6000/tcp
+ENV ASPNETCORE_URLS http://*:6000
+
+ENTRYPOINT ["./init.sh"]
