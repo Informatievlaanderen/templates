@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/informatievlaanderen/templates/compare/v1.8.0...v1.8.1) (2019-06-09)
+
+
+### Bug Fixes
+
+* correct sentence structure ([6c5a487](https://github.com/informatievlaanderen/templates/commit/6c5a487))
+
 # [1.8.0](https://github.com/informatievlaanderen/templates/compare/v1.7.0...v1.8.0) (2019-06-07)
 
 
