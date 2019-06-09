@@ -8,7 +8,7 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
 
     public class CreateExampleAggregateRequest
     {
-        /// <summary>Id the example aggregate to create.</summary>
+        /// <summary>Id of the example aggregate to create.</summary>
         [Required]
         [Display(Name = "Id")]
         public Guid? Id { get; set; }
