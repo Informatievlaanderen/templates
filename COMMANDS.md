@@ -1,7 +1,7 @@
 # Pack NuGet package
 
 ```bash
-mono .paket/paket.exe pack --template src/Be.Vlaanderen.Basisregisters.Templates/paket.template dist
+dotnet paket pack --template src/Be.Vlaanderen.Basisregisters.Templates/paket.template dist
 ```
 
 # Install local NuGet package
@@ -65,7 +65,7 @@ The template "Basisregisters Vlaanderen Registry" was created successfully.
 
 ```bash
 rm -rf dist/; \
-mono .paket/paket.exe pack --template src/Be.Vlaanderen.Basisregisters.Templates/paket.template dist; \
+dotnet paket pack --template src/Be.Vlaanderen.Basisregisters.Templates/paket.template dist; \
 dotnet new -u Be.Vlaanderen.Basisregisters.Templates; \
 dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.0.0.1-beta.nupkg;
 ```

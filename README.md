@@ -1,4 +1,4 @@
-# agentschap Informatie Vlaanderen .NET Core templates
+# Informatie Vlaanderen .NET Core templates
 
 ## Goal
 
