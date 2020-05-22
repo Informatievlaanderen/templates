@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
 
-    <RuntimeFrameworkVersion>2.2.4</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>3.1.4</RuntimeFrameworkVersion>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <OutputType>Exe</OutputType>
 
@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExampleRegistry.Projections.Api\ExampleRegistry.Projections.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
   </ItemGroup>
 
   <Import Project="..\..\.paket\Paket.Restore.targets" />

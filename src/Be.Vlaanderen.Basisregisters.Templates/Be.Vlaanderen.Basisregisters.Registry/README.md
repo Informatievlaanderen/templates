@@ -15,19 +15,6 @@
 
 ## Development
 
-### Employee
-
-We use a private NuGet proxy which needs authentication. Depending on the fact if you are an employee or not, follow these steps:
-
-* Open `paket.dependencies`
-* Comment the public NuGet feed.
-* Uncomment the private MyGet feed.
-
-To use the private MyGet feed, setup 2 environment variables:
-
-* MYGET_FEED_USER
-* MYGET_FEED_PASS
-
 ### Getting started
 
 TODO: More to come :)
@@ -44,7 +31,7 @@ This is how the generated documentation looks: https://structurizr.com/share/377
 
 Our `build.sh` script knows a few tricks. By default it runs with the `Test` target.
 
-The buildserver passes in `BITBUCKET_BUILD_NUMBER` as an integer to version the results and `BUILD_DOCKER_REGISTRY` to point to a Docker registry to push the resulting Docker images.
+The buildserver passes in `CI_BUILD_NUMBER` as an integer to version the results and `BUILD_DOCKER_REGISTRY` to point to a Docker registry to push the resulting Docker images.
 
 #### NpmInstall
 
