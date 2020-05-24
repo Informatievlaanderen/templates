@@ -18,7 +18,7 @@ namespace ExampleRegistry.ExampleAggregate.Events
 
         [JsonConstructor]
         private ExampleAggregateWasBorn(
-            Guid exampleAggregateId)
+            [JsonProperty("exampleAggregateId")] Guid exampleAggregateId)
             : this(
                 new ExampleAggregateId(exampleAggregateId)) { }
     }

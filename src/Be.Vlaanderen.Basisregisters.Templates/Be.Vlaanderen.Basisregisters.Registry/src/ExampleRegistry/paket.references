@@ -1,4 +1,5 @@
 Autofac
+Newtonsoft.Json
 
 Be.Vlaanderen.Basisregisters.AggregateSource
 Be.Vlaanderen.Basisregisters.AggregateSource.ExplicitRouting
