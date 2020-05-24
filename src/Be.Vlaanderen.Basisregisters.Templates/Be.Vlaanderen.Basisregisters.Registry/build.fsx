@@ -24,6 +24,7 @@ let test = testSolution
 let publish = publish assemblyVersionNumber
 let pack = pack nugetVersionNumber
 let containerize = containerize dockerRepository
+let push = push dockerRepository
 
 supportedRuntimeIdentifiers <- [ "linux-x64" ]
 
@@ -62,11 +63,11 @@ Target.create "Pack" ignore
 Target.create "Containerize" ignore
 Target.create "Push" ignore
 
-  ==> "Build_Solution"
 "NpmInstall"
   ==> "DotNetCli"
   ==> "Clean"
   ==> "Restore_Solution"
+  ==> "Build_Solution"
   ==> "Build"
 
 "Build"
