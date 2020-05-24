@@ -9,7 +9,7 @@ namespace ExampleRegistry.Projections.Api.ExampleAggregateList
     {
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
     public class ExampleAggregateListConfiguration : IEntityTypeConfiguration<ExampleAggregateList>
@@ -20,13 +20,14 @@ namespace ExampleRegistry.Projections.Api.ExampleAggregateList
         {
             b.ToTable(TableName, Schema.Api)
                 .HasKey(x => x.Id)
-                .ForSqlServerIsClustered(false);
+                .IsClustered(false);
 
             b.Property(x => x.Name)
-                .HasMaxLength(ExampleAggregateName.MaxLength);
+                .HasMaxLength(ExampleAggregateName.MaxLength)
+                .IsRequired(false);
 
             b.HasIndex(x => x.Name)
-                .ForSqlServerIsClustered();
+                .IsClustered();
         }
     }
 }

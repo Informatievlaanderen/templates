@@ -9,10 +9,10 @@ namespace ExampleRegistry.Projections.Api.ExampleAggregateDetail
     {
         public Guid Id { get; set; }
 
-        public string NameDutch { get; set; }
-        public string NameFrench { get; set; }
-        public string NameEnglish { get; set; }
-        public string NameGerman { get; set; }
+        public string? NameDutch { get; set; }
+        public string? NameFrench { get; set; }
+        public string? NameEnglish { get; set; }
+        public string? NameGerman { get; set; }
     }
 
     public class ExampleAggregateDetailConfiguration : IEntityTypeConfiguration<ExampleAggregateDetail>
@@ -23,22 +23,26 @@ namespace ExampleRegistry.Projections.Api.ExampleAggregateDetail
         {
             b.ToTable(TableName, Schema.Api)
                 .HasKey(x => x.Id)
-                .ForSqlServerIsClustered(false);
+                .IsClustered(false);
 
             b.Property(x => x.NameDutch)
-                .HasMaxLength(ExampleAggregateName.MaxLength);
+                .HasMaxLength(ExampleAggregateName.MaxLength)
+                .IsRequired(false);
 
             b.Property(x => x.NameFrench)
-                .HasMaxLength(ExampleAggregateName.MaxLength);
+                .HasMaxLength(ExampleAggregateName.MaxLength)
+                .IsRequired(false);
 
             b.Property(x => x.NameEnglish)
-                .HasMaxLength(ExampleAggregateName.MaxLength);
+                .HasMaxLength(ExampleAggregateName.MaxLength)
+                .IsRequired(false);
 
             b.Property(x => x.NameGerman)
-                .HasMaxLength(ExampleAggregateName.MaxLength);
+                .HasMaxLength(ExampleAggregateName.MaxLength)
+                .IsRequired(false);
 
             b.HasIndex(x => x.NameDutch)
-                .ForSqlServerIsClustered();
+                .IsClustered();
         }
     }
 }

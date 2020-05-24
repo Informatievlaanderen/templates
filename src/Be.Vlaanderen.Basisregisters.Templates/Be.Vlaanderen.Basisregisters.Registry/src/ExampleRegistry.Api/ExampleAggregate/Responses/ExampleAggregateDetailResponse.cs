@@ -34,9 +34,9 @@ namespace ExampleRegistry.Api.ExampleAggregate.Responses
         }
     }
 
-    public class ExampleAggregateDetailResponseExamples : IExamplesProvider
+    public class ExampleAggregateDetailResponseExamples : IExamplesProvider<ExampleAggregateDetailResponse>
     {
-        public object GetExamples() =>
+        public ExampleAggregateDetailResponse GetExamples() =>
             new ExampleAggregateDetailResponse(
                 new ExampleAggregateDetail
                 {

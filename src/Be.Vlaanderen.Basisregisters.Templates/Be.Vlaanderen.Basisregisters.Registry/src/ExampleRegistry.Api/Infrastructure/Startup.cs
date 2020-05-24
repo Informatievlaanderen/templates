@@ -17,10 +17,11 @@ namespace ExampleRegistry.Api.Infrastructure
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Diagnostics.HealthChecks;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.OpenApi.Models;
     using Modules;
     using Projections.Api;
     using SqlStreamStore;
-    using Swashbuckle.AspNetCore.Swagger;
 
     /// <summary>Represents the startup process for the application.</summary>
     public class Startup
@@ -59,16 +60,16 @@ namespace ExampleRegistry.Api.Infrastructure
                     },
                     Swagger =
                     {
-                        ApiInfo = (provider, description) => new Info
+                        ApiInfo = (provider, description) => new OpenApiInfo
                         {
                             Version = description.ApiVersion.ToString(),
                             Title = "Example Registry API",
                             Description = GetApiLeadingText(description),
-                            Contact = new Contact
+                            Contact = new OpenApiContact
                             {
                                 Name = "agentschap Informatie Vlaanderen",
                                 Email = "informatie.vlaanderen@vlaanderen.be",
-                                Url = "https://vlaanderen.be/informatie-vlaanderen"
+                                Url = new Uri("https://vlaanderen.be/informatie-vlaanderen")
                             }
                         },
                         XmlCommentPaths = new [] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name }
@@ -114,8 +115,8 @@ namespace ExampleRegistry.Api.Infrastructure
         public void Configure(
             IServiceProvider serviceProvider,
             IApplicationBuilder app,
-            IHostingEnvironment env,
-            IApplicationLifetime appLifetime,
+            IWebHostEnvironment env,
+            IHostApplicationLifetime appLifetime,
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider,
             ApiDataDogToggle datadogToggle,
@@ -127,12 +128,23 @@ namespace ExampleRegistry.Api.Infrastructure
             StartupHelpers.EnsureSqlStreamStoreSchema<Startup>(streamStore, loggerFactory);
 
             app
-                .UseDatadog<Startup>(
-                    serviceProvider,
-                    loggerFactory,
-                    datadogToggle,
-                    debugDataDogToggle,
-                    _configuration["DataDog:ServiceName"])
+                .UseDataDog<Startup>(new DataDogOptions
+                {
+                    Common =
+                    {
+                        ServiceProvider = serviceProvider,
+                        LoggerFactory = loggerFactory
+                    },
+                    Toggles =
+                    {
+                        Enable = datadogToggle,
+                        Debug = debugDataDogToggle
+                    },
+                    Tracing =
+                    {
+                        ServiceName = _configuration["DataDog:ServiceName"],
+                    }
+                })
 
                 .UseDefaultForApi(new StartupUseOptions
                 {
@@ -148,6 +160,15 @@ namespace ExampleRegistry.Api.Infrastructure
                     {
                         VersionProvider = apiVersionProvider,
                         Info = groupName => $"Example Registry API {groupName}",
+                        CSharpClientOptions =
+                        {
+                            ClassName = "ExampleRegistry",
+                            Namespace = "ExampleRegistry.Api"
+                        },
+                        TypeScriptClientOptions =
+                        {
+                            ClassName = "ExampleRegistry"
+                        },
 #if (!ExcludeExampleAggregate)
                         CustomExceptionHandlers = new IExceptionHandler[]
                         {

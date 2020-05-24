@@ -16,7 +16,8 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.OpenApi.Models;
 
     public class TestStartup
     {
@@ -48,16 +49,16 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
                     },
                     Swagger =
                     {
-                        ApiInfo = (provider, description) => new Info
+                        ApiInfo = (provider, description) => new OpenApiInfo
                         {
                             Version = description.ApiVersion.ToString(),
                             Title = "Example Registry API",
                             Description = GetApiLeadingText(description),
-                            Contact = new Contact
+                            Contact = new OpenApiContact
                             {
                                 Name = "agentschap Informatie Vlaanderen",
                                 Email = "informatie.vlaanderen@vlaanderen.be",
-                                Url = "https://vlaanderen.be/informatie-vlaanderen"
+                                Url = new Uri("https://vlaanderen.be/informatie-vlaanderen")
                             }
                         },
                         XmlCommentPaths = new [] { typeof(Startup).GetTypeInfo().Assembly.GetName().Name }
@@ -86,8 +87,8 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
         public void Configure(
             IServiceProvider serviceProvider,
             IApplicationBuilder app,
-            IHostingEnvironment env,
-            IApplicationLifetime appLifetime,
+            IWebHostEnvironment env,
+            IHostApplicationLifetime appLifetime,
             ILoggerFactory loggerFactory,
             IApiVersionDescriptionProvider apiVersionProvider)
         {
@@ -105,6 +106,15 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
                 {
                     VersionProvider = apiVersionProvider,
                     Info = groupName => $"Example Registry API {groupName}",
+                    CSharpClientOptions =
+                    {
+                        ClassName = "ExampleRegistry",
+                        Namespace = "ExampleRegistry.Api.Tests"
+                    },
+                    TypeScriptClientOptions =
+                    {
+                        ClassName = "ExampleRegistry"
+                    },
                 },
                 Server =
                 {
