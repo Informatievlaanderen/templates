@@ -67,6 +67,20 @@ dotnet new be-registry \
 The template "Basisregisters Vlaanderen Registry" was created successfully.
 ```
 
+```bash
+dotnet new be-registry -n MunicipalityRegistry -aggregate Municipalit -desc "Authentic base registry containing public services of Flanders." -company "agentschap Informatie Vlaanderen" -email informatie.vlaanderen@vlaanderen.be -site https://vlaanderen.be/informatie-vlaanderen
+
+dotnet new be-registry \
+       -n MunicipalityRegistry \
+       -aggregate Municipality \
+       -desc "Authentic base registry containing public services of Flanders." \
+       -company "agentschap Informatie Vlaanderen" \
+       -email informatie.vlaanderen@vlaanderen.be \
+       -site https://vlaanderen.be/informatie-vlaanderen
+
+The template "Basisregisters Vlaanderen Registry" was created successfully.
+```
+
 # All in one packaging & installing
 
 ```bash
