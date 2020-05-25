@@ -19,7 +19,7 @@ let packTemplate _ =
     { p with
         ToolType = ToolType.CreateLocalTool()
         BuildConfig = "Release"
-        OutputPath = buildDir @@ "nuget"
+        OutputPath = buildDir
         Version = nugetVersion
         TemplateFile = "src" @@ "Be.Vlaanderen.Basisregisters.Templates" @@ "paket.template"
     }

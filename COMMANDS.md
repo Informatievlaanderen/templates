@@ -7,7 +7,7 @@ dotnet paket pack --template src/Be.Vlaanderen.Basisregisters.Templates/paket.te
 # Install local NuGet package
 
 ```bash
-dotnet new -i dist/nuget/Be.Vlaanderen.Basisregisters.Templates.0.0.0.nupkg
+dotnet new -i dist/Be.Vlaanderen.Basisregisters.Templates.1.0.0.nupkg
 ```
 
 # Install a beta version from nuget.org
@@ -31,7 +31,13 @@ dotnet new be-registry -h
 # Check what a template would install
 
 ```bash
-dotnet new be-registry --dry-run
+dotnet new be-registry --dry-run \
+       -n PublicServiceRegistry \
+       -aggregate PublicService \
+       -desc "Authentic base registry containing public services of Flanders." \
+       -company "agentschap Informatie Vlaanderen" \
+       -email informatie.vlaanderen@vlaanderen.be \
+       -site https://vlaanderen.be/informatie-vlaanderen
 ```
 
 # Create a new registry

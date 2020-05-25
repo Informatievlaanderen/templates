@@ -95,5 +95,5 @@ Target.create "Push" ignore
   ==> "Push"
 // Possibly add more projects to push here
 
-// By default we build & test
-Target.runOrDefault "Test"
+// By default we build
+Target.runOrDefault "Build"

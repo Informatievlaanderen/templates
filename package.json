@@ -133,7 +133,7 @@
         "path": "@semantic-release/github",
         "assets": [
           {
-            "path": "dist/**/*.nupkg"
+            "path": "dist/*.nupkg"
           }
         ]
       }
