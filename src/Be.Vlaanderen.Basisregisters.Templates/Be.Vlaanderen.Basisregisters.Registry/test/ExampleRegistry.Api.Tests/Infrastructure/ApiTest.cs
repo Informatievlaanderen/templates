@@ -33,7 +33,11 @@ namespace ExampleRegistry.Api.Tests.Infrastructure
         protected TestServer CreateServer() =>
             new TestServer(
                 new WebHostBuilder()
-                    .ConfigureLogging(builder => builder.AddProvider(new XunitLoggerProvider(_testOutputHelper)))
+                    .ConfigureLogging(builder =>
+                    {
+                        builder.ClearProviders();
+                        builder.AddProvider(new XunitLoggerProvider(_testOutputHelper));
+                    })
                     .ConfigureServices(services => services.AddSingleton(_stubResolver))
                     .UseStartup<TestStartup>());
 

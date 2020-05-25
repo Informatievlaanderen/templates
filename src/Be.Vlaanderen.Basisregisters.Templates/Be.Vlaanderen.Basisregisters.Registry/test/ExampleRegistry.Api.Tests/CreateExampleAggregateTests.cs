@@ -62,7 +62,7 @@ namespace ExampleRegistry.Api.Tests
 
             var commands = await Post("/v1/example-aggregates", request);
 
-            Assert.True(commands.Count == 1);
+            Assert.Single(commands);
 
             commands[0].IsEqual(
                 new NameExampleAggregate(
@@ -85,7 +85,7 @@ namespace ExampleRegistry.Api.Tests
 
             var commands = await Post("/v1/example-aggregates", request);
 
-            Assert.True(commands.Count == 0);
+            Assert.Empty(commands);
         }
     }
 }
