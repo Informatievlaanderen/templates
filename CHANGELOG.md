@@ -1,3 +1,17 @@
+# [1.9.0](https://github.com/informatievlaanderen/templates/compare/v1.8.1...v1.9.0) (2020-05-26)
+
+
+### Bug Fixes
+
+* do not hardcode logging to console ([1f19cb7](https://github.com/informatievlaanderen/templates/commit/1f19cb7eccf70889835cf1b9a757ef1474c45a1d))
+* do not hardcode logging to console ([9caf0e9](https://github.com/informatievlaanderen/templates/commit/9caf0e95d5d5c07cbca480fd07774d381cfeb90b))
+* move to gh actions ([602b662](https://github.com/informatievlaanderen/templates/commit/602b662dd872c7631d0523b858c72a59a81dda91))
+
+
+### Features
+
+* upgrade to netcore 3.1.3 ([5525364](https://github.com/informatievlaanderen/templates/commit/55253645ba6efc3c79bf41373f99968c0a36d332))
+
 ## [1.8.1](https://github.com/informatievlaanderen/templates/compare/v1.8.0...v1.8.1) (2019-06-09)
 
 
