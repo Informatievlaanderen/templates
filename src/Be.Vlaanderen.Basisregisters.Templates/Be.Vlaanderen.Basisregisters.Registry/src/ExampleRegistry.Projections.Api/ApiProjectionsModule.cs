@@ -1,7 +1,7 @@
 namespace ExampleRegistry.Projections.Api
 {
     using System;
-    using System.Data.SqlClient;
+    using Microsoft.Data.SqlClient;
     using Be.Vlaanderen.Basisregisters.DataDog.Tracing.Sql.EntityFrameworkCore;
     using Autofac;
     using Infrastructure;

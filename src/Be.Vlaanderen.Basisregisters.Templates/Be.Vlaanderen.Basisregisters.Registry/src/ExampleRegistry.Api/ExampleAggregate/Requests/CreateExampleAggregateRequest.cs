@@ -32,9 +32,9 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
         }
     }
 
-    public class CreateExampleAggregateRequestExample : IExamplesProvider
+    public class CreateExampleAggregateRequestExample : IExamplesProvider<CreateExampleAggregateRequest>
     {
-        public object GetExamples() =>
+        public CreateExampleAggregateRequest GetExamples() =>
             new CreateExampleAggregateRequest
             {
                 Id = Guid.NewGuid(),

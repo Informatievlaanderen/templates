@@ -60,9 +60,9 @@ namespace ExampleRegistry.Api.ExampleAggregate.Responses
         }
     }
 
-    public class ExampleAggregateListResponseExamples : IExamplesProvider
+    public class ExampleAggregateListResponseExamples : IExamplesProvider<ExampleAggregateListResponse>
     {
-        public object GetExamples()
+        public ExampleAggregateListResponse GetExamples()
             => new ExampleAggregateListResponse
             {
                 ExampleAggregates = new List<ExampleAggregateListItemResponse>

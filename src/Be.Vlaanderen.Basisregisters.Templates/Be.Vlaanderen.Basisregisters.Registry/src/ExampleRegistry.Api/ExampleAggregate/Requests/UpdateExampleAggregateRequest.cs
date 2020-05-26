@@ -31,9 +31,9 @@ namespace ExampleRegistry.Api.ExampleAggregate.Requests
         }
     }
 
-    public class UpdateExampleAggregateRequestExample : IExamplesProvider
+    public class UpdateExampleAggregateRequestExample : IExamplesProvider<UpdateExampleAggregateRequest>
     {
-        public object GetExamples() =>
+        public UpdateExampleAggregateRequest GetExamples() =>
             new UpdateExampleAggregateRequest
             {
                 Id = Guid.NewGuid(),

@@ -5,15 +5,18 @@ structurizr-*.json
 tracing*.log
 
 .vs/
+.vscode/
 .fake/
 .idea/
+.paket/
+.ionide/
 wwwroot/
 
 [Pp]ackages/
 [Pp]aket-files/
 [Dd]ebug/
 [Rr]elease/
-[Bb]build/
+[Bb]uild/
 [Bb]in/
 [Oo]bj/
 [Xx]64/

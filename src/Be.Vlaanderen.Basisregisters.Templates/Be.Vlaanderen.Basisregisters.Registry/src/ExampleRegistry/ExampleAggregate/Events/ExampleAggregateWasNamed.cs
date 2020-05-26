@@ -26,9 +26,9 @@ namespace ExampleRegistry.ExampleAggregate.Events
 
         [JsonConstructor]
         private ExampleAggregateWasNamed(
-            Guid exampleAggregateId,
-            string name,
-            Language language)
+            [JsonProperty("exampleAggregateId")] Guid exampleAggregateId,
+            [JsonProperty("name")] string name,
+            [JsonProperty("language")] Language language)
             : this(
                 new ExampleAggregateId(exampleAggregateId),
                 new ExampleAggregateName(name, language)) { }

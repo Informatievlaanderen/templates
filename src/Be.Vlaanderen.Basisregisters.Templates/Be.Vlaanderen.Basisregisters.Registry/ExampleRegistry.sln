@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C2F8FF63-7A48-4179-A720-86206C42F496}"
 EndProject
@@ -11,8 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{453A56
 		.gitignore = .gitignore
 		docs\appsettings-example.json = docs\appsettings-example.json
 		build.fsx = build.fsx
+		.github\CODEOWNERS = .github\CODEOWNERS
 		global.json = global.json
 		LICENSE = LICENSE
+		.github\workflows\main.yml = .github\workflows\main.yml
 		package.json = package.json
 		paket.dependencies = paket.dependencies
 		README.md = README.md

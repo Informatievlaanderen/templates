@@ -15,10 +15,10 @@ licenseUrl https://opensource.org/licenses/EUPL-1.2
 description Example Registry.
 
 files
-  ExampleRegistry.Api.dll => lib\netcoreapp2.2
-  ExampleRegistry.Api.pdb => lib\netcoreapp2.2
-  ExampleRegistry.Api.xml => lib\netcoreapp2.2
+  ExampleRegistry.Api.dll => lib\netcoreapp3.1
+  ExampleRegistry.Api.pdb => lib\netcoreapp3.1
+  ExampleRegistry.Api.xml => lib\netcoreapp3.1
   ExampleRegistry.Api.xml => content
 
-  ExampleRegistry.dll => lib\netcoreapp2.2
-  ExampleRegistry.pdb => lib\netcoreapp2.2
+  ExampleRegistry.dll => lib\netcoreapp3.1
+  ExampleRegistry.pdb => lib\netcoreapp3.1

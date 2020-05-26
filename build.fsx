@@ -1,5 +1,5 @@
 #r "paket:
-version 5.241.6
+version 5.245.1
 framework: netstandard20
 source https://api.nuget.org/v3/index.json
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 4.1.0 //"
@@ -19,7 +19,7 @@ let packTemplate _ =
     { p with
         ToolType = ToolType.CreateLocalTool()
         BuildConfig = "Release"
-        OutputPath = buildDir @@ "nuget"
+        OutputPath = buildDir
         Version = nugetVersion
         TemplateFile = "src" @@ "Be.Vlaanderen.Basisregisters.Templates" @@ "paket.template"
     }
