@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/informatievlaanderen/templates/compare/v1.9.0...v1.9.1) (2020-05-26)
+
+
+### Bug Fixes
+
+* publish correct nuget ([c4aa5c1](https://github.com/informatievlaanderen/templates/commit/c4aa5c1668ff8f508244f4a51fe59d4cf2778437))
+
 # [1.9.0](https://github.com/informatievlaanderen/templates/compare/v1.8.1...v1.9.0) (2020-05-26)
 
 
